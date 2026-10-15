@@ -1,0 +1,23 @@
+{%- doc -%}
+  One ingredient card of the "GL | Ingredients" section: round image, name, role and a short description.
+
+  @param {object} block - The ingredient block
+
+  @example
+  {% render 'gl-ingredient', block: block %}
+{%- enddoc -%}
+{%- assign b = block.settings -%}
+<li class="gl-ing__item gl-reveal" {{ block.shopify_attributes }}>
+  <div class="gl-ing__media">
+    {%- render 'gl-image', image: b.image, alt: b.image_alt, sizes: '140px', class: 'gl-ing__img', label: 'Ingredient, 800 x 800 px' -%}
+  </div>
+  <div class="gl-ing__copy">
+    <h3 class="gl-ing__name">{{ b.name | escape }}</h3>
+    {%- if b.role != blank -%}
+      <p class="gl-ing__role">{{ b.role | escape }}</p>
+    {%- endif -%}
+    {%- if b.text != blank -%}
+      <div class="gl-ing__text">{{ b.text }}</div>
+    {%- endif -%}
+  </div>
+</li>

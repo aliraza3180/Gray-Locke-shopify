@@ -1,0 +1,31 @@
+{%- doc -%}
+  Pill button with an arrow for the "GL |" sections.
+
+  @param {string} [label] - Button text. Nothing is rendered when blank
+  @param {string} [url] - Link
+  @param {string} [style] - gold, dark or outline. Defaults to gold
+  @param {boolean} [new_tab] - Open in a new tab
+  @param {string} [class] - Extra class
+
+  @example
+  {% render 'gl-button', label: s.button_label, url: s.button_url %}
+{%- enddoc -%}
+{%- if label != blank -%}
+  <a
+    class="gl-btn gl-btn--{{ style | default: 'gold' }} {{ class }}"
+    {% if url != blank %}
+      href="{{ url }}"
+    {% else %}
+      role="link" aria-disabled="true"
+    {% endif %}
+    {% if new_tab %}
+      target="_blank" rel="noopener"
+    {% endif %}
+  >
+    <span>{{ label | escape }}</span>
+    {%- render 'gl-icon', name: 'arrow' -%}
+    {%- if new_tab -%}
+      <span class="visually-hidden">(opens in a new tab)</span>
+    {%- endif -%}
+  </a>
+{%- endif -%}

@@ -1,0 +1,341 @@
+{%- liquid
+  assign s = section.settings
+  assign checks = section.blocks | where: 'type', 'check'
+-%}
+<div
+  id="GlBand-{{ section.id }}"
+  class="gl gl-band gl--{{ s.tone }} gl-band--{{ s.layout }}{% if s.image == blank %} gl-band--no-image{% endif %}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px; --gl-fade: {{ s.fade | divided_by: 100.0 }}; --gl-focus: {{ s.focus }}%;"
+>
+  {%- if s.image != blank -%}
+    <div class="gl-band__media" aria-hidden="true">
+      {%- render 'gl-image', image: s.image, image_mobile: s.image_mobile, alt: '', sizes: '100vw', class: 'gl-band__image' -%}
+    </div>
+  {%- endif -%}
+  <div class="gl-container gl-band__inner">
+    <div class="gl-band__main gl-reveal">
+      {%- if s.quote -%}
+        <figure class="gl-quote">
+          <blockquote class="gl-quote__text">{{ s.heading | escape | newline_to_br }}</blockquote>
+          {%- if s.subline != blank -%}
+            <figcaption class="gl-quote__by">{{ s.subline | escape }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- else -%}
+        {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size -%}
+      {%- endif -%}
+      {%- if s.caption != blank -%}
+        <p class="gl-band__caption">{{ s.caption | escape | newline_to_br }}</p>
+      {%- endif -%}
+    </div>
+    {%- if checks.size > 0 or s.button_label != blank or s.logo != blank or s.side_text != blank -%}
+      <div class="gl-band__side gl-reveal">
+        {%- if checks.size > 0 -%}
+          <ul class="gl-ticks gl-ticks--lg" role="list">
+            {%- for block in checks -%}
+              <li {{ block.shopify_attributes }}>{%- render 'gl-icon', name: 'leaf' -%}<span>{{ block.settings.text | escape }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if s.logo != blank -%}
+          <div class="gl-band__logo">
+            {{ s.logo | image_url: width: 600 | image_tag: widths: '300, 450, 600', sizes: '240px', alt: shop.name, loading: 'lazy' }}
+          </div>
+        {%- endif -%}
+        {%- if s.button_label != blank -%}
+          <div class="gl-actions">
+            {%- render 'gl-button', label: s.button_label, url: s.button_url -%}
+          </div>
+        {%- endif -%}
+        {%- if s.side_text != blank -%}
+          <p class="gl-band__caption">{{ s.side_text | escape | newline_to_br }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GL | Band",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "cta",
+          "label": "Text left, button right"
+        },
+        {
+          "value": "list",
+          "label": "Text left, checklist right"
+        },
+        {
+          "value": "center",
+          "label": "Centred"
+        },
+        {
+          "value": "split",
+          "label": "Text on black, photo on the right"
+        }
+      ],
+      "default": "cta"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo behind the text",
+      "info": "2400 x 1000 px."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Photo on phones"
+    },
+    {
+      "type": "range",
+      "id": "fade",
+      "label": "Dark overlay on the photo",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 55,
+      "info": "Keeps the text readable over the photo."
+    },
+    {
+      "type": "range",
+      "id": "focus",
+      "label": "Photo focus",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50,
+      "info": "Which part of the photo stays in view when it is cropped. 0 is the left edge, 100 the right."
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ink"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "checkbox",
+      "id": "quote",
+      "label": "Show the heading as an italic quote",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Small line under the text"
+    },
+    {
+      "type": "header",
+      "content": "Right side"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "dark",
+          "label": "Black"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "gold"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Transparent PNG."
+    },
+    {
+      "type": "text",
+      "id": "side_text",
+      "label": "Small line under the button"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "check",
+      "name": "Checklist item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Made in USA with Global Ingredients"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Band",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

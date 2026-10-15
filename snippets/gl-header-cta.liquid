@@ -1,0 +1,25 @@
+{%- doc -%}
+  "Shop Now" button in the header, set in Theme settings > GL | Brand.
+  Rendered from snippets/header-actions.liquid (desktop, before the cart icon)
+  and from snippets/header-drawer.liquid (phone menu, below the links).
+
+  @param {boolean} [drawer] - Render the full-width version for the phone menu
+
+  @example
+  {% render 'gl-header-cta' %}
+{%- enddoc -%}
+{%- if settings.gl_header_cta_label != blank and settings.gl_header_cta_link != blank -%}
+  {%- if drawer -%}
+    <div class="gl-drawer-cta">
+      <a class="gl-drawer-cta__button button" href="{{ settings.gl_header_cta_link }}">
+        <span>{{ settings.gl_header_cta_label | escape }}</span>
+        {%- render 'gl-icon', name: 'arrow' -%}
+      </a>
+    </div>
+  {%- else -%}
+    <a class="gl-header-cta button" href="{{ settings.gl_header_cta_link }}">
+      <span>{{ settings.gl_header_cta_label | escape }}</span>
+      {%- render 'gl-icon', name: 'arrow' -%}
+    </a>
+  {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,201 @@
+{
+  "sections": {
+    "hero": {
+      "type": "gl-hero",
+      "settings": {
+        "image": "shopify://shop_images/gl-about-hero.jpg",
+        "image_mobile": "shopify://shop_images/gl-about-hero-mobile.jpg",
+        "fade": 90,
+        "focus": 70,
+        "height": "medium",
+        "tone": "ink",
+        "heading_tag": "h1",
+        "heading_size": "xl",
+        "button_label": "Our Mission",
+        "button_url": "#mission",
+        "eyebrow": "Our story",
+        "heading": "Natural\nConfidence",
+        "heading_accent": "At Every Stage.",
+        "text": "<p>Brand Name was created with a simple belief — hair is a part of who you are, and supporting its natural color can help you look, feel and live more like yourself.</p>",
+        "caption": "Same you.\nBrighter possibilities."
+      }
+    },
+    "trust": {
+      "type": "gl-trust-bar",
+      "blocks": {
+        "item_001": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Nature\nInspired"
+          }
+        },
+        "item_002": {
+          "type": "item",
+          "settings": {
+            "icon": "molecule",
+            "text": "Fueled by\nScience®"
+          }
+        },
+        "item_003": {
+          "type": "item",
+          "settings": {
+            "icon": "gmp",
+            "text": "Sourced from a\nGMP Certified Facility"
+          }
+        },
+        "item_004": {
+          "type": "item",
+          "settings": {
+            "icon": "flag",
+            "text": "Made in USA\nwith Global Ingredients"
+          }
+        }
+      },
+      "block_order": [
+        "item_001",
+        "item_002",
+        "item_003",
+        "item_004"
+      ],
+      "settings": {
+        "label": "Product highlights",
+        "heading": "",
+        "tone": "panel",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "approach": {
+      "type": "gl-split",
+      "blocks": {
+        "card_005": {
+          "type": "card",
+          "settings": {
+            "icon": "leaf",
+            "title": "Our mission",
+            "anchor": "mission",
+            "text": "<p>To create science-driven nutritional solutions that help people look and feel their best — naturally — at every stage of life.</p>"
+          }
+        },
+        "card_006": {
+          "type": "card",
+          "settings": {
+            "icon": "people",
+            "title": "For everyone",
+            "text": "<p>Designed for adult men and women who want to support natural hair color, hair health and overall vitality.†</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_005",
+        "card_006"
+      ],
+      "settings": {
+        "media_side": "left",
+        "media_style": "square",
+        "image": "shopify://shop_images/gl-about-berries.jpg",
+        "image_alt": "Black berries and a white flower on dark stone, with green leaves",
+        "focus": 50,
+        "tone": "ivory",
+        "heading": "A Modern Approach\nto a Natural Process.",
+        "heading_tag": "h2",
+        "heading_size": "lg",
+        "text": "<p>Brand Name was developed to help support the biological processes that influence natural hair pigmentation using a thoughtful blend of vitamins, minerals and botanical extracts — inspired by nature and fueled by science.†</p><p>We believe aging is a privilege, and looking your best at every stage of life is part of feeling your best. Brand Name is not about changing who you are — it’s about supporting what makes you, you.</p>",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "pillars": {
+      "type": "gl-columns",
+      "blocks": {
+        "column_007": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/gl-about-mountains.jpg",
+            "image_alt": "Mountains at sunrise",
+            "title": "Inspired by Nature",
+            "text": "<p>We harness the power of botanicals and nutrients found in nature to support the body’s natural processes.</p>"
+          }
+        },
+        "column_008": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/gl-about-botanical.jpg",
+            "image_alt": "Green leaves with water droplets",
+            "title": "Fueled by Science",
+            "text": "<p>Our formula combines traditionally used ingredients and key nutrients, thoughtfully formulated to deliver targeted nutritional support.†</p>"
+          }
+        },
+        "column_009": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/gl-about-stone.jpg",
+            "image_alt": "Dark stone with green leaves and berries",
+            "title": "A Brighter Tomorrow",
+            "text": "<p>Because true confidence isn’t about chasing youth — it’s about supporting the best version of you, today and tomorrow.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_007",
+        "column_008",
+        "column_009"
+      ],
+      "settings": {
+        "style": "cards",
+        "tone": "cream",
+        "heading_tag": "h2",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "commitment": {
+      "type": "gl-band",
+      "settings": {
+        "layout": "cta",
+        "image": "shopify://shop_images/gl-about-commitment.jpg",
+        "image_mobile": "shopify://shop_images/gl-about-commitment-mobile.jpg",
+        "fade": 50,
+        "focus": 60,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": false,
+        "padding_top": 112,
+        "padding_bottom": 112,
+        "eyebrow": "More than a supplement",
+        "heading": "It’s a Commitment\nTo a Brighter You.",
+        "text": "<p>Brand Name is here to support your journey with purposeful nutrition and a belief in what’s possible — at every stage.</p>",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop",
+        "side_text": "Nature.\nNutrition.\nScience.\nA brighter you.™"
+      }
+    },
+    "quote": {
+      "type": "gl-band",
+      "settings": {
+        "layout": "cta",
+        "fade": 55,
+        "focus": 50,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": true,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "heading": "“Aging is a privilege. Looking and feeling your best is a choice.”",
+        "logo": "shopify://shop_images/gl-logo.png",
+        "side_text": "Inspired by Nature. Fueled by Science.®"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "approach",
+    "pillars",
+    "commitment",
+    "quote"
+  ]
+}

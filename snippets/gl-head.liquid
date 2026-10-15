@@ -1,0 +1,37 @@
+{%- doc -%}
+  Loads the stylesheet for the "GL |" sections, passes the brand colours from
+  Theme settings > GL | Brand to it, and runs the light fade-in on scroll.
+  Rendered once from snippets/stylesheets.liquid.
+
+  @example
+  {% render 'gl-head' %}
+{%- enddoc -%}
+{{ 'gl-sections.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  :root {
+    --gl-ink: {{ settings.gl_ink | default: '#0B0B0B' }};
+    --gl-panel: {{ settings.gl_panel | default: '#141413' }};
+    --gl-gold: {{ settings.gl_gold | default: '#E8C9A6' }};
+    --gl-gold-button: {{ settings.gl_gold_button | default: '#DBBC9D' }};
+    --gl-label-gold: {{ settings.gl_label_gold | default: '#C4A474' }};
+    --gl-bronze: {{ settings.gl_bronze | default: '#7A5C3C' }};
+    --gl-champagne: {{ settings.gl_champagne | default: '#E4D1BC' }};
+    --gl-cream: {{ settings.gl_cream | default: '#F6EDE3' }};
+    --gl-sand: {{ settings.gl_sand | default: '#F0E0CD' }};
+    --gl-ivory: {{ settings.gl_ivory | default: '#FDFCFA' }};
+  }
+{%- endstyle -%}
+{%- unless request.design_mode -%}
+<script>
+  (() => {
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.documentElement.classList.add('gl-motion');
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px' });
+    const scan = () => document.querySelectorAll('.gl-reveal:not(.is-in)').forEach((el) => io.observe(el));
+    document.addEventListener('DOMContentLoaded', scan);
+    if (document.readyState !== 'loading') scan();
+  })();
+</script>
+{%- endunless -%}

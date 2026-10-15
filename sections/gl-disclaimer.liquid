@@ -1,0 +1,122 @@
+{%- liquid
+  assign s = section.settings
+-%}
+{%- if s.disclaimer != blank -%}
+  <div
+    id="GlDisclaimer-{{ section.id }}"
+    class="gl gl-disclaimer gl--{{ s.tone }}"
+    style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px;"
+    role="note"
+    aria-label="{{ s.label | escape }}"
+  >
+    <div class="gl-container">
+      <div class="gl-disclaimer__box">
+        <p>{{ s.disclaimer | escape }}</p>
+        {%- if s.note != blank -%}
+          <p>{{ s.note | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "GL | FDA Disclaimer",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shown on every page when placed in the footer group. The first line is the dietary supplement disclaimer required alongside claims marked with a dagger (†). Do not reword it."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Accessible label",
+      "default": "Dietary supplement disclaimer"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "†These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Second line"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | FDA Disclaimer",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

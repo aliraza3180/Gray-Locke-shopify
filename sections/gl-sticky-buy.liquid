@@ -1,0 +1,110 @@
+{%- liquid
+  assign s = section.settings
+  # On the product page the section uses that page's product; elsewhere the one chosen in the settings.
+  assign item = s.product | default: product
+  assign start_index = s.variant_position | minus: 1
+  assign variant = item.variants[start_index] | default: item.selected_or_first_available_variant
+  assign form_id = 'GlStickyBuy-' | append: section.id
+-%}
+{%- if item != blank and variant -%}
+  <div id="GlSticky-{{ section.id }}" class="gl-sticky" data-gl-sticky hidden>
+    <div class="gl-sticky__inner">
+      <div class="gl-sticky__info">
+        <p class="gl-sticky__title">{{ item.title | escape }}</p>
+        {%- if item.variants.size > 1 -%}
+          <fieldset class="gl-sticky__sizes">
+            <legend class="visually-hidden">{{ s.size_label | escape }}</legend>
+            {%- for v in item.variants -%}
+              <label class="gl-sticky__size">
+                <input type="radio" name="GlStickySize-{{ section.id }}" value="{{ v.id }}" data-price="{{ v.price | money | escape }}" {% if v.id == variant.id %}checked{% endif %} {% unless v.available %}disabled{% endunless %}>
+                <span>{{ v.title | escape }}</span>
+              </label>
+            {%- endfor -%}
+          </fieldset>
+        {%- endif -%}
+      </div>
+      <p class="gl-sticky__price" data-gl-sticky-price>{{ variant.price | money }}</p>
+      {%- render 'gl-buy', product: item, variant: variant, form_id: form_id, section_id: section.id, label: s.button_label -%}
+    </div>
+  </div>
+  {%- render 'add-to-cart-button-styles' -%}
+  {%- render 'buy-buttons-styles' -%}
+  <script>
+    (() => {
+      const bar = document.getElementById('GlSticky-{{ section.id }}');
+      if (!bar || bar.dataset.glReady) return;
+      bar.dataset.glReady = '1';
+      const input = bar.querySelector('input[name="id"]');
+      const price = bar.querySelector('[data-gl-sticky-price]');
+      bar.querySelectorAll('.gl-sticky__size input').forEach((radio) => radio.addEventListener('change', () => {
+        if (input) input.value = radio.value;
+        if (price) price.textContent = radio.dataset.price;
+      }));
+      // Shown once the first screen (the hero or the product form) has scrolled away, phones and tablets only.
+      const watch = document.querySelector('{{ s.watch_selector | default: "main > :first-child" }}');
+      bar.hidden = false;
+      if (!watch || !('IntersectionObserver' in window)) { bar.classList.add('is-visible'); return; }
+      new IntersectionObserver(([entry]) => {
+        bar.classList.toggle('is-visible', !entry.isIntersecting && entry.boundingClientRect.top < 0);
+      }).observe(watch);
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "GL | Sticky Add to Cart",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "A bar at the bottom of phone and tablet screens, shown after the first screen has scrolled away. On the product page it uses that product."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Needed on pages other than the product page."
+    },
+    {
+      "type": "range",
+      "id": "variant_position",
+      "label": "Size chosen first",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "size_label",
+      "label": "Size buttons, accessible label",
+      "default": "Choose a size"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "watch_selector",
+      "label": "Show after this element has scrolled away (CSS selector)",
+      "default": "main > :first-child"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Sticky Add to Cart",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

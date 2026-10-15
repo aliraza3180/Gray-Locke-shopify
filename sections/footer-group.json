@@ -1,0 +1,154 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "footer_m9NzUG": {
+      "type": "footer",
+      "blocks": {
+        "brand": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "gap": 12,
+            "width": "fill"
+          },
+          "blocks": {
+            "brand_title": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>Brand Name</h2>",
+                "type_preset": "h4",
+                "width": "100%",
+                "max_width": "normal"
+              }
+            },
+            "brand_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Inspired by Nature. Fueled by Science.®</p>",
+                "type_preset": "rte",
+                "width": "100%",
+                "max_width": "normal"
+              }
+            },
+            "brand_billing": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Brand Name is a brand of Parent Company, Inc. All purchases are billed under PARENT COMPANY.</p>",
+                "type_preset": "rte",
+                "width": "100%",
+                "max_width": "normal"
+              }
+            }
+          },
+          "block_order": [
+            "brand_title",
+            "brand_text",
+            "brand_billing"
+          ]
+        },
+        "explore": {
+          "type": "menu",
+          "settings": {
+            "menu": "main-menu",
+            "heading": "Explore",
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
+            "menu_spacing": 10
+          }
+        },
+        "support": {
+          "type": "menu",
+          "settings": {
+            "menu": "footer",
+            "heading": "Support",
+            "heading_preset": "h5",
+            "link_preset": "paragraph",
+            "menu_spacing": 10
+          }
+        },
+        "payments": {
+          "type": "payment-icons",
+          "settings": {
+            "horizontal_alignment": "flex-start",
+            "gap": 10
+          }
+        }
+      },
+      "block_order": [
+        "brand",
+        "explore",
+        "support",
+        "payments"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 32,
+        "background_color": "#0B0B0B",
+        "padding-block-start": 56,
+        "padding-block-end": 40
+      }
+    },
+    "footer_utilities_jLGE8U": {
+      "type": "footer-utilities",
+      "blocks": {
+        "footer_copyright_jweRK8": {
+          "type": "footer-copyright",
+          "settings": {
+            "show_powered_by": false,
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "footer_policy_list_VCdnpa": {
+          "type": "footer-policy-list",
+          "settings": {
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "footer_copyright_jweRK8",
+        "footer_policy_list_VCdnpa"
+      ],
+      "name": "t:names.utilities",
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "divider_thickness": 1,
+        "divider_color": "#2c2925",
+        "background_color": "#0B0B0B",
+        "padding-block-start": 20,
+        "padding-block-end": 48
+      }
+    },
+    "gl_disclaimer": {
+      "type": "gl-disclaimer",
+      "settings": {
+        "label": "Dietary supplement disclaimer",
+        "disclaimer": "†These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.",
+        "note": "",
+        "tone": "ivory",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "gl_disclaimer",
+    "footer_m9NzUG",
+    "footer_utilities_jLGE8U"
+  ]
+}

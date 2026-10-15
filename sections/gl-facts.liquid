@@ -1,0 +1,234 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<div
+  id="GlFacts-{{ section.id }}"
+  class="gl gl-facts-section gl--{{ s.tone }}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="gl-container">
+    {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size, class: 'gl-head--center' -%}
+    <div class="gl-formula">
+      <ul class="gl-formula__roles" role="list">
+        {%- for block in section.blocks -%}
+          {%- assign lines = block.settings.items | newline_to_br | split: '<br />' -%}
+          <li class="gl-role gl-reveal" {{ block.shopify_attributes }}>
+            <p class="gl-role__count" aria-hidden="true">{{ lines.size }}</p>
+            <h3 class="gl-role__title">{{ block.settings.title | escape }}</h3>
+            {%- if block.settings.text != blank -%}
+              <p class="gl-role__text">{{ block.settings.text | escape }}</p>
+            {%- endif -%}
+            <ul class="gl-role__items" role="list">
+              {%- for line in lines -%}
+                {%- assign item = line | strip -%}
+                {%- if item != blank -%}<li>{{ item | escape }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if s.facts_html != blank -%}
+        <div class="gl-formula__facts gl-reveal">
+          {{ s.facts_html }}
+          {%- if s.facts_note != blank -%}
+            <p class="gl-formula__note">{{ s.facts_note | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GL | Full Formula",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "html",
+      "id": "facts_html",
+      "label": "Supplement Facts (HTML)",
+      "info": "Generated from the label by the build script. Do not edit by hand."
+    },
+    {
+      "type": "text",
+      "id": "facts_note",
+      "label": "Line under the Supplement Facts"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "role",
+      "name": "Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Botanicals"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Line under the title"
+        },
+        {
+          "type": "textarea",
+          "id": "items",
+          "label": "Ingredients",
+          "info": "One per line."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Full Formula",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

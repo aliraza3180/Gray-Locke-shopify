@@ -1,0 +1,371 @@
+{
+  "sections": {
+    "hero": {
+      "type": "gl-hero",
+      "blocks": {
+        "check_001": {
+          "type": "check",
+          "settings": {
+            "text": "Supports natural hair pigment†"
+          }
+        },
+        "check_002": {
+          "type": "check",
+          "settings": {
+            "text": "Promotes healthy hair†"
+          }
+        },
+        "check_003": {
+          "type": "check",
+          "settings": {
+            "text": "16 powerful ingredients"
+          }
+        },
+        "check_004": {
+          "type": "check",
+          "settings": {
+            "text": "For men & women"
+          }
+        },
+        "check_005": {
+          "type": "check",
+          "settings": {
+            "text": "Inspired by nature. Fueled by science.®"
+          }
+        }
+      },
+      "block_order": [
+        "check_001",
+        "check_002",
+        "check_003",
+        "check_004",
+        "check_005"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/gl-shop-hero.jpg",
+        "image_mobile": "shopify://shop_images/gl-shop-hero-mobile.jpg",
+        "fade": 90,
+        "focus": 65,
+        "height": "bottles",
+        "tone": "ink",
+        "heading_tag": "h1",
+        "heading_size": "xl",
+        "button_label": "",
+        "button_url": "",
+        "eyebrow": "Brand Name",
+        "heading": "Support Natural Color.\nHealthier Hair.",
+        "heading_accent": "Brighter You.",
+        "text": "<p>Advanced nutritional support for natural hair pigment, hair health and overall vitality — for him, for her, for every stage.†</p>",
+        "caption": "Nature.\nNutrition.\nScience.\nA brighter you.™",
+        "badge_top": "Our",
+        "badge_main": "Best Value",
+        "badge_sub": "120 count\nMore days."
+      }
+    },
+    "sizes": {
+      "type": "gl-size-selector",
+      "blocks": {
+        "option_006": {
+          "type": "option",
+          "settings": {
+            "variant_position": 1,
+            "title": "",
+            "text": "1-month supply",
+            "badge": "",
+            "days": 30,
+            "save_vs_position": 0,
+            "save_multiplier": 2,
+            "save_text": "Save [amount]",
+            "checks": "30 servings · 2 capsules a day\n16 powerful ingredients\nSupports natural hair pigment†\nA great way to get started",
+            "image": "shopify://shop_images/gl-bottle-60.png",
+            "image_alt": "Brand Name Anti-Gray & Pigment Support, 60 capsule bottle"
+          }
+        },
+        "option_007": {
+          "type": "option",
+          "settings": {
+            "variant_position": 2,
+            "title": "",
+            "text": "2-month supply",
+            "badge": "Best Value",
+            "days": 60,
+            "save_vs_position": 1,
+            "save_multiplier": 2,
+            "save_text": "Save [amount] vs two 60-count",
+            "checks": "60 servings · 2 capsules a day\n16 powerful ingredients\nSupports natural hair pigment†\nMore days. Better value.",
+            "image": "shopify://shop_images/gl-bottle-120.png",
+            "image_alt": "Brand Name Anti-Gray & Pigment Support, 120 capsule bottle"
+          }
+        },
+        "assurance_008": {
+          "type": "assurance",
+          "settings": {
+            "icon": "truck",
+            "text": "Fast & Secure Shipping"
+          }
+        },
+        "assurance_009": {
+          "type": "assurance",
+          "settings": {
+            "icon": "shield",
+            "text": "Satisfaction Guarantee"
+          }
+        },
+        "assurance_00a": {
+          "type": "assurance",
+          "settings": {
+            "icon": "lock",
+            "text": "Secure Checkout"
+          }
+        }
+      },
+      "block_order": [
+        "option_006",
+        "option_007",
+        "assurance_008",
+        "assurance_009",
+        "assurance_00a"
+      ],
+      "settings": {
+        "product": "brand-name",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "button_mode": "cart",
+        "button_label": "Add to Cart",
+        "button_url": "shopify://pages/shop",
+        "show_quantity": true,
+        "details_label": "View full details",
+        "price_pending_text": "$XX.XX",
+        "anchor": "shop",
+        "tone": "cream",
+        "padding_top": 96,
+        "padding_bottom": 88,
+        "eyebrow": "Order now",
+        "heading": "Choose Your Supply"
+      }
+    },
+    "trust": {
+      "type": "gl-trust-bar",
+      "blocks": {
+        "item_00b": {
+          "type": "item",
+          "settings": {
+            "icon": "flag",
+            "text": "Made in USA\nwith Global Ingredients"
+          }
+        },
+        "item_00c": {
+          "type": "item",
+          "settings": {
+            "icon": "gmp",
+            "text": "Sourced from a\nGMP Certified Facility"
+          }
+        },
+        "item_00d": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "16 Powerful\nIngredients"
+          }
+        },
+        "item_00e": {
+          "type": "item",
+          "settings": {
+            "icon": "molecule",
+            "text": "Fueled by\nScience®"
+          }
+        },
+        "item_00f": {
+          "type": "item",
+          "settings": {
+            "icon": "people",
+            "text": "For Adult\nMen & Women"
+          }
+        }
+      },
+      "block_order": [
+        "item_00b",
+        "item_00c",
+        "item_00d",
+        "item_00e",
+        "item_00f"
+      ],
+      "settings": {
+        "label": "Product highlights",
+        "heading": "",
+        "tone": "champagne",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "powered": {
+      "type": "gl-split",
+      "blocks": {
+        "item_00g": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-saw-palmetto.jpg",
+            "image_alt": "Saw Palmetto",
+            "title": "Saw Palmetto",
+            "text": "Botanical support for a healthy hair environment†"
+          }
+        },
+        "item_00h": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-catalase.jpg",
+            "image_alt": "Catalase Complex",
+            "title": "Catalase Complex",
+            "text": "Antioxidant enzyme complex†"
+          }
+        },
+        "item_00i": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-copper.jpg",
+            "image_alt": "Copper",
+            "title": "Copper",
+            "text": "Contributes to normal hair pigmentation†"
+          }
+        },
+        "item_00j": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-biotin.jpg",
+            "image_alt": "Biotin & Zinc",
+            "title": "Biotin & Zinc",
+            "text": "Key nutrients for healthy-looking hair†"
+          }
+        }
+      },
+      "block_order": [
+        "item_00g",
+        "item_00h",
+        "item_00i",
+        "item_00j"
+      ],
+      "settings": {
+        "media_side": "left",
+        "media_style": "square",
+        "image": "shopify://shop_images/gl-shop-berries.jpg",
+        "image_alt": "Black saw palmetto berries and a white flower on dark stone",
+        "focus": 50,
+        "tone": "ivory",
+        "eyebrow": "",
+        "heading": "Powered by\nScience & Nature",
+        "heading_tag": "h2",
+        "heading_size": "lg",
+        "text": "<p>A thoughtfully selected blend of vitamins, minerals and botanical extracts that work together to support your natural hair pigment, hair health and overall vitality.†</p>",
+        "button_label": "Explore Ingredients",
+        "button_url": "shopify://pages/ingredients",
+        "button_style": "dark",
+        "aside_style": "rows",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "faq": {
+      "type": "gl-faq",
+      "blocks": {
+        "question_00k": {
+          "type": "question",
+          "settings": {
+            "question": "How do I take Brand Name?",
+            "answer": "<p>2 capsules daily preferably with meals or as directed by a healthcare professional. Each bottle of 120 capsules provides 60 servings.</p>"
+          }
+        },
+        "question_00l": {
+          "type": "question",
+          "settings": {
+            "question": "Is Brand Name safe to take?",
+            "answer": "<p>Brand Name is intended for use by healthy adults when taken according to label directions. As with any dietary supplement, consult your healthcare professional before use if you are pregnant or nursing, have a medical condition, take medications or have questions about whether Brand Name is appropriate for you.</p>"
+          }
+        },
+        "question_00m": {
+          "type": "question",
+          "settings": {
+            "question": "Can I take Brand Name with other supplements?",
+            "answer": "<p>Brand Name contains multiple vitamins, minerals and botanical ingredients, so it’s important to consider your total daily intake from other supplements. If you take medications or other dietary supplements, talk with your healthcare professional before combining them.</p>"
+          }
+        },
+        "question_00n": {
+          "type": "question",
+          "settings": {
+            "question": "Does Brand Name contain any allergens?",
+            "answer": "<p>Brand Name contains soy and wheat (barley grass). This product is manufactured and packaged in a facility which may also process milk, soy, wheat, egg, peanuts, tree nuts, fish and crustacean shellfish.</p>"
+          }
+        },
+        "question_00o": {
+          "type": "question",
+          "settings": {
+            "question": "Where is Brand Name made?",
+            "answer": "<p>Brand Name is made in the USA with globally sourced ingredients. We select ingredients based on formula requirements and quality rather than limiting sourcing to a single country.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_00k",
+        "question_00l",
+        "question_00m",
+        "question_00n",
+        "question_00o"
+      ],
+      "settings": {
+        "head_align": "gl-head--center",
+        "show_tabs": false,
+        "structured_data": false,
+        "tone": "cream",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "eyebrow": "Before you order",
+        "heading": "Good to Know",
+        "button_label": "See All FAQs",
+        "button_url": "shopify://pages/faq",
+        "button_style": "dark"
+      }
+    },
+    "closing": {
+      "type": "gl-band",
+      "settings": {
+        "layout": "cta",
+        "image": "shopify://shop_images/gl-shop-couple.jpg",
+        "image_mobile": "shopify://shop_images/gl-shop-couple-mobile.jpg",
+        "fade": 50,
+        "focus": 70,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": false,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "eyebrow": "Real nutrition. Real confidence.",
+        "heading": "A Brighter Tomorrow\nStarts Today.",
+        "text": "<p>Brand Name is more than a supplement — it’s nutritional support for the hair you want to keep, at every stage of life.</p>",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop#shop",
+        "side_text": "Same you.\nBrighter possibilities."
+      }
+    },
+    "sticky": {
+      "type": "gl-sticky-buy",
+      "settings": {
+        "product": "brand-name",
+        "variant_position": 2,
+        "size_label": "Choose a size",
+        "button_label": "Add to Cart",
+        "watch_selector": "main > :first-child"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "sizes",
+    "trust",
+    "powered",
+    "faq",
+    "closing",
+    "sticky"
+  ]
+}

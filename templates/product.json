@@ -1,0 +1,624 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "disclosures_g9mWze": {
+          "type": "disclosures",
+          "name": "t:names.disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h5",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h6",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "{{ settings.color_palette.color2 }}",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "left",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 8,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 16,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 20,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "t:names.header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_xrnftG": {
+                  "type": "text",
+                  "name": "t:names.product_title",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h2",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "custom",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "2rem",
+                    "line_height": "tight",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "text_color": "#111111",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_xrnftG",
+                "price_tVjtKg"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "{{ settings.color_palette.color2 }}",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {},
+                  "disabled": true
+                }
+              },
+              "block_order": []
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "t:names.product_description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "gl_eyebrow": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Brand Name · Dietary Supplement</p>",
+                "max_width": "normal",
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "line_height": "tight",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.8125rem",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "text_color": "#7A5C3C"
+              }
+            },
+            "gl_claim": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Anti-Gray & Pigment Support†</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte"
+              }
+            },
+            "gl_assurance": {
+              "type": "custom-liquid",
+              "settings": {
+                "custom_liquid": "<ul class=\"gl-pdp-assure\" role=\"list\"><li>{% render 'gl-icon', name: 'truck' %}<span>Fast &amp; Secure Shipping</span></li><li>{% render 'gl-icon', name: 'shield' %}<span>Satisfaction Guarantee</span></li><li>{% render 'gl-icon', name: 'lock' %}<span>Secure Checkout</span></li></ul>"
+              }
+            },
+            "gl_details": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "h5"
+              },
+              "blocks": {
+                "use": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Suggested Use",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>2 capsules daily preferably with meals or as directed by a healthcare professional.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                },
+                "facts": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Supplement Facts",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "custom-liquid",
+                      "settings": {
+                        "custom_liquid": "<div class=\"gl-facts\"><table class=\"gl-facts__table\"><caption>Supplement Facts</caption><thead><tr><th scope=\"col\">Serving Size 2 Capsules<br>Servings Per Container: 60</th><th scope=\"col\">Amount Per Serving</th><th scope=\"col\">% Daily Value</th></tr></thead><tbody><tr><th scope=\"row\">Vitamin B-6 (as pyridoxine HCl)</th><td>10 mg</td><td>588%</td></tr><tr><th scope=\"row\">Folate</th><td>670 mcg DFE<br>(400 mcg folic acid)</td><td>167%</td></tr><tr><th scope=\"row\">Biotin</th><td>300 mcg</td><td>1,000%</td></tr><tr><th scope=\"row\">Pantothenic Acid (as calcium d-pantothenate)</th><td>300 mg</td><td>6,000%</td></tr><tr><th scope=\"row\">Zinc (as zinc oxide)</th><td>10 mg</td><td>91%</td></tr><tr><th scope=\"row\">Copper (as cupric oxide)</th><td>1 mg</td><td>111%</td></tr></tbody><tbody class=\"gl-facts__group\"><tr><th scope=\"row\">Brand Name Proprietary Blend<span class=\"gl-facts__parts\">Consisting of: Saw Palmetto Berries (45% extract), PABA (para-Aminobenzoic Acid), L-Tyrosine, Horsetail Aerial Parts (7% extract), Plant Sterol Complex (38-45% beta-sitosterol), Stinging Nettle Root 4:1 Extract, Catalase Complex, Chlorella Extract (2% chlorophyll), Fo-Ti Root Powder, Barley Grass Juice Powder.</span></th><td>1,124.3 mg</td><td>*</td></tr></tbody></table><p class=\"gl-facts__note\">*Daily Value not established.</p><p><strong>Other ingredients:</strong> Gelatin (bovine), vegetable magnesium stearate, and silicon dioxide.</p><p><strong>Allergen warning:</strong> Contains soy and wheat (barley grass).</p></div>"
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                },
+                "caution": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Caution and Allergens",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "content": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Do not exceed recommended dose. Pregnant or nursing mothers, children under 18, and individuals with a known medical condition should consult a physician before using this or any dietary supplement.</p><p>Contains soy and wheat (barley grass).</p><p>This product is manufactured and packaged in a facility which may also process milk, soy, wheat, egg, peanuts, tree nuts, fish and crustacean shellfish.</p><p>Keep out of the reach of children. Do not use if safety seal is damaged or missing. Store in a cool, dry place.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      }
+                    }
+                  },
+                  "block_order": [
+                    "content"
+                  ]
+                }
+              },
+              "block_order": [
+                "use",
+                "facts",
+                "caution"
+              ]
+            }
+          },
+          "block_order": [
+            "gl_eyebrow",
+            "group_icgrde",
+            "gl_claim",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "buy_buttons_eYQEYi",
+            "gl_assurance",
+            "text_aEtTtq",
+            "gl_details"
+          ]
+        }
+      },
+      "block_order": [
+        "disclosures_g9mWze"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": false,
+        "background_color": "#FDFCFA",
+        "padding-block-start": 32,
+        "padding-block-end": 56
+      }
+    },
+    "gl_trust": {
+      "type": "gl-trust-bar",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "icon": "flag",
+            "text": "Made in USA\nwith Global Ingredients"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "icon": "gmp",
+            "text": "Sourced from a\nGMP Certified Facility"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "16 Powerful\nIngredients"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "icon": "people",
+            "text": "For Adult\nMen & Women"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {
+        "label": "Product highlights",
+        "heading": "",
+        "tone": "champagne",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "gl_formula": {
+      "type": "gl-facts",
+      "blocks": {
+        "role_00c": {
+          "type": "role",
+          "settings": {
+            "title": "Catalase Complex",
+            "text": "An antioxidant enzyme complex at the centre of the formula.",
+            "items": "Catalase Complex"
+          }
+        },
+        "role_00d": {
+          "type": "role",
+          "settings": {
+            "title": "Pigment Nutrients",
+            "text": "Copper and two building blocks linked to the hair’s natural pigment.",
+            "items": "Copper\nL-Tyrosine\nPABA"
+          }
+        },
+        "role_00e": {
+          "type": "role",
+          "settings": {
+            "title": "Daily Hair Nutrition",
+            "text": "B vitamins and zinc for everyday nutritional support.",
+            "items": "Biotin\nZinc\nVitamin B-6\nFolate\nPantothenic Acid"
+          }
+        },
+        "role_00f": {
+          "type": "role",
+          "settings": {
+            "title": "Botanicals",
+            "text": "Plant extracts with a long history of traditional use.",
+            "items": "Saw Palmetto\nStinging Nettle Root\nHorsetail\nPlant Sterols\nFo-Ti Root\nChlorella\nBarley Grass"
+          }
+        }
+      },
+      "block_order": [
+        "role_00c",
+        "role_00d",
+        "role_00e",
+        "role_00f"
+      ],
+      "settings": {
+        "tone": "ivory",
+        "eyebrow": "Nothing hidden",
+        "heading": "The Full Formula",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "text": "<p>All 16 ingredients, grouped by the role they play, and the Supplement Facts exactly as printed on the bottle.</p>",
+        "facts_html": "<div class=\"gl-facts\"><table class=\"gl-facts__table\"><caption>Supplement Facts</caption><thead><tr><th scope=\"col\">Serving Size 2 Capsules<br>Servings Per Container: 60</th><th scope=\"col\">Amount Per Serving</th><th scope=\"col\">% Daily Value</th></tr></thead><tbody><tr><th scope=\"row\">Vitamin B-6 (as pyridoxine HCl)</th><td>10 mg</td><td>588%</td></tr><tr><th scope=\"row\">Folate</th><td>670 mcg DFE<br>(400 mcg folic acid)</td><td>167%</td></tr><tr><th scope=\"row\">Biotin</th><td>300 mcg</td><td>1,000%</td></tr><tr><th scope=\"row\">Pantothenic Acid (as calcium d-pantothenate)</th><td>300 mg</td><td>6,000%</td></tr><tr><th scope=\"row\">Zinc (as zinc oxide)</th><td>10 mg</td><td>91%</td></tr><tr><th scope=\"row\">Copper (as cupric oxide)</th><td>1 mg</td><td>111%</td></tr></tbody><tbody class=\"gl-facts__group\"><tr><th scope=\"row\">Brand Name Proprietary Blend<span class=\"gl-facts__parts\">Consisting of: Saw Palmetto Berries (45% extract), PABA (para-Aminobenzoic Acid), L-Tyrosine, Horsetail Aerial Parts (7% extract), Plant Sterol Complex (38-45% beta-sitosterol), Stinging Nettle Root 4:1 Extract, Catalase Complex, Chlorella Extract (2% chlorophyll), Fo-Ti Root Powder, Barley Grass Juice Powder.</span></th><td>1,124.3 mg</td><td>*</td></tr></tbody></table><p class=\"gl-facts__note\">*Daily Value not established.</p><p><strong>Other ingredients:</strong> Gelatin (bovine), vegetable magnesium stearate, and silicon dioxide.</p><p><strong>Allergen warning:</strong> Contains soy and wheat (barley grass).</p></div>",
+        "facts_note": "Per bottle of 120 capsules. 2 capsules daily preferably with meals or as directed by a healthcare professional.",
+        "padding_top": 88,
+        "padding_bottom": 88
+      }
+    },
+    "gl_faq": {
+      "type": "gl-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "How do I take Brand Name?",
+            "answer": "<p>2 capsules daily preferably with meals or as directed by a healthcare professional. Each bottle of 120 capsules provides 60 servings.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Is Brand Name safe to take?",
+            "answer": "<p>Brand Name is intended for use by healthy adults when taken according to label directions. As with any dietary supplement, consult your healthcare professional before use if you are pregnant or nursing, have a medical condition, take medications or have questions about whether Brand Name is appropriate for you.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I take Brand Name with other supplements?",
+            "answer": "<p>Brand Name contains multiple vitamins, minerals and botanical ingredients, so it’s important to consider your total daily intake from other supplements. If you take medications or other dietary supplements, talk with your healthcare professional before combining them.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Does Brand Name contain any allergens?",
+            "answer": "<p>Brand Name contains soy and wheat (barley grass). This product is manufactured and packaged in a facility which may also process milk, soy, wheat, egg, peanuts, tree nuts, fish and crustacean shellfish.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Where is Brand Name made?",
+            "answer": "<p>Brand Name is made in the USA with globally sourced ingredients. We select ingredients based on formula requirements and quality rather than limiting sourcing to a single country.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ],
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "Common Questions",
+        "heading_accent": "",
+        "text": "",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "head_align": "gl-head--center",
+        "show_tabs": false,
+        "structured_data": true,
+        "tone": "cream",
+        "padding_top": 80,
+        "padding_bottom": 88
+      }
+    },
+    "gl_sticky": {
+      "type": "gl-sticky-buy",
+      "settings": {
+        "product": "",
+        "variant_position": 2,
+        "size_label": "Choose a size",
+        "button_label": "Add to Cart",
+        "watch_selector": "main > :first-child"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "gl_trust",
+    "gl_formula",
+    "gl_faq",
+    "gl_sticky"
+  ]
+}

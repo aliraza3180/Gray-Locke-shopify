@@ -1,0 +1,461 @@
+{%- liquid
+  assign s = section.settings
+  assign questions = section.blocks | where: 'type', 'question'
+  assign categories = section.blocks | where: 'type', 'category'
+  assign show_tabs = false
+  if s.show_tabs and categories.size > 1
+    assign show_tabs = true
+  endif
+  assign product = s.product
+  assign variant = product.selected_or_first_available_variant
+  if product != blank and s.card_variant_position > 0
+    assign v_index = s.card_variant_position | minus: 1
+    assign variant = product.variants[v_index] | default: variant
+  endif
+  assign has_card = false
+  if s.card_title != blank or s.card_image != blank
+    assign has_card = true
+  endif
+-%}
+<div
+  id="GlFaq-{{ section.id }}"
+  class="gl gl-faq gl--{{ s.tone }}{% if show_tabs %} gl-faq--tabs{% endif %}{% if has_card %} gl-faq--card{% endif %}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="gl-container">
+    {%- if s.heading != blank or s.eyebrow != blank -%}
+      {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size, class: s.head_align -%}
+    {%- endif -%}
+    <div class="gl-faq__layout">
+      {%- if show_tabs or s.quote != blank -%}
+        <div class="gl-faq__side">
+          {%- if show_tabs -%}
+            <div class="gl-faq__tabs" role="group" aria-label="{{ s.tabs_label | escape }}" data-gl-faq-tabs>
+              <button type="button" class="gl-faq__tab" aria-pressed="true" data-cat="all" aria-controls="GlFaqList-{{ section.id }}">{{ s.all_label | escape }}</button>
+              {%- for block in categories -%}
+                <button type="button" class="gl-faq__tab" aria-pressed="false" data-cat="{{ block.settings.title | handle }}" aria-controls="GlFaqList-{{ section.id }}" {{ block.shopify_attributes }}>{{ block.settings.title | escape }}</button>
+              {%- endfor -%}
+            </div>
+            <p class="visually-hidden" aria-live="polite" data-gl-faq-status></p>
+          {%- endif -%}
+          {%- if s.quote != blank -%}
+            <figure class="gl-faq__quote">
+              {%- render 'gl-icon', name: 'leaf' -%}
+              <blockquote>{{ s.quote | escape | newline_to_br }}</blockquote>
+            </figure>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="gl-faq__main">
+        <ul class="gl-faq__list" id="GlFaqList-{{ section.id }}" role="list">
+          {%- assign cat = '' -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'category' -%}
+              {%- assign cat = block.settings.title | handle -%}
+            {%- elsif block.type == 'question' -%}
+              <li class="gl-faq__item" data-cat="{{ cat }}" {{ block.shopify_attributes }}>
+                <details class="gl-faq__row">
+                  <summary>
+                    <span class="gl-faq__q">{{ block.settings.question | escape }}</span>
+                    <span class="gl-faq__toggle" aria-hidden="true">{%- render 'gl-icon', name: 'plus' -%}</span>
+                  </summary>
+                  <div class="gl-faq__a rte">{{ block.settings.answer }}</div>
+                </details>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+        {%- if s.button_label != blank -%}
+          <div class="gl-actions">
+            {%- render 'gl-button', label: s.button_label, url: s.button_url, style: s.button_style -%}
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if has_card -%}
+        <aside class="gl-faq__card" aria-label="{{ product.title | default: shop.name | escape }}">
+          {%- if s.card_title != blank -%}
+            <p class="gl-script gl-faq__card-title">{{ s.card_title | escape | newline_to_br }}</p>
+          {%- endif -%}
+          {%- if s.card_text != blank -%}
+            <p class="gl-faq__card-text">{{ s.card_text | escape }}</p>
+          {%- endif -%}
+          {%- render 'gl-image', image: s.card_image, alt: s.card_image_alt, sizes: '320px', class: 'gl-faq__card-image', label: 'Bottle, transparent PNG' -%}
+          {%- if product != blank and variant -%}
+            <p class="gl-faq__card-price"><span>{{ variant.title | escape }}</span> <strong>{{ variant.price | money }}</strong></p>
+            {%- assign faq_form_id = 'GlFaqBuy-' | append: section.id -%}
+            {%- render 'gl-buy', product: product, variant: variant, form_id: faq_form_id, section_id: section.id, label: s.card_button_label -%}
+          {%- endif -%}
+        </aside>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{%- if has_card and product != blank -%}
+  {%- render 'add-to-cart-button-styles' -%}
+  {%- render 'buy-buttons-styles' -%}
+  {%- render 'fly-to-cart-styles' -%}
+{%- endif -%}
+{%- if show_tabs -%}
+  <script>
+    (() => {
+      const root = document.getElementById('GlFaq-{{ section.id }}');
+      if (!root || root.dataset.glReady) return;
+      root.dataset.glReady = '1';
+      const tabs = root.querySelectorAll('.gl-faq__tab');
+      const items = root.querySelectorAll('.gl-faq__item');
+      const status = root.querySelector('[data-gl-faq-status]');
+      tabs.forEach((tab) => tab.addEventListener('click', () => {
+        const cat = tab.dataset.cat;
+        let shown = 0;
+        tabs.forEach((t) => t.setAttribute('aria-pressed', String(t === tab)));
+        items.forEach((item) => {
+          const on = cat === 'all' || item.dataset.cat === cat;
+          item.hidden = !on;
+          if (on) shown++;
+        });
+        if (status) status.textContent = shown + ' {{ s.count_label | escape }}';
+      }));
+    })();
+  </script>
+{%- endif -%}
+{%- if s.structured_data and questions.size > 0 -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for block in questions -%}
+          {
+            "@type": "Question",
+            "name": {{ block.settings.question | json }},
+            "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "GL | FAQ",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add a \"Group\" block for each category, then the \"Question\" blocks that belong to it. Category buttons filter the questions."
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "select",
+      "id": "head_align",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "",
+          "label": "Left"
+        },
+        {
+          "value": "gl-head--center",
+          "label": "Centred"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tabs",
+      "label": "Show category buttons",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tabs_label",
+      "label": "Category buttons, accessible label",
+      "default": "Question categories"
+    },
+    {
+      "type": "text",
+      "id": "all_label",
+      "label": "Label of the first button",
+      "default": "All Questions"
+    },
+    {
+      "type": "text",
+      "id": "count_label",
+      "label": "Spoken after filtering",
+      "default": "questions shown"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Italic quote under the buttons"
+    },
+    {
+      "type": "header",
+      "content": "Product card on the right"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "range",
+      "id": "card_variant_position",
+      "label": "Size",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "textarea",
+      "id": "card_title",
+      "label": "Italic title",
+      "info": "Leave title and image empty to hide the card."
+    },
+    {
+      "type": "text",
+      "id": "card_text",
+      "label": "Small text"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image",
+      "label": "Bottle",
+      "info": "Transparent PNG."
+    },
+    {
+      "type": "text",
+      "id": "card_image_alt",
+      "label": "Image description (alt text)"
+    },
+    {
+      "type": "text",
+      "id": "card_button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "dark",
+          "label": "Black"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "checkbox",
+      "id": "structured_data",
+      "label": "Add FAQ data for search engines",
+      "default": true,
+      "info": "Switch on for one FAQ section per page only."
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "General"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | FAQ",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,309 @@
+{%- liquid
+  assign s = section.settings
+  assign half = section.blocks.size | plus: 1 | divided_by: 2
+  assign has_center = false
+  if s.layout == 'around'
+    assign has_center = true
+  endif
+-%}
+<div
+  id="GlIngredients-{{ section.id }}"
+  class="gl gl-ing gl--{{ s.tone }} gl-ing--{{ s.layout }}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px; --gl-cols: {{ s.columns }};"
+>
+  <div class="gl-container">
+    {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size, class: 'gl-head--center' -%}
+    <div class="gl-ing__body">
+      {%- if has_center -%}
+        <ul class="gl-ing__list gl-ing__list--left" role="list">
+          {%- for block in section.blocks limit: half -%}
+            {%- render 'gl-ingredient', block: block -%}
+          {%- endfor -%}
+        </ul>
+        <div class="gl-ing__center gl-reveal">
+          {%- render 'gl-image', image: s.image, alt: s.image_alt, sizes: '(min-width: 990px) 30vw, 70vw', class: 'gl-ing__bottle', label: 'Bottle, transparent PNG' -%}
+        </div>
+        <ul class="gl-ing__list gl-ing__list--right" role="list">
+          {%- for block in section.blocks offset: half -%}
+            {%- render 'gl-ingredient', block: block -%}
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <ul class="gl-ing__list" role="list">
+          {%- for block in section.blocks -%}
+            {%- render 'gl-ingredient', block: block -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    {%- if s.button_label != blank -%}
+      <div class="gl-actions gl-actions--center">
+        {%- render 'gl-button', label: s.button_label, url: s.button_url, style: s.button_style -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GL | Ingredients",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "around",
+          "label": "Bottle in the middle, ingredients around it"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ],
+      "default": "around"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns on desktop (grid)",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bottle",
+      "info": "Transparent PNG, from the client's label render."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description (alt text)"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "dark",
+          "label": "Black"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "800 x 800 px. Shown as a circle."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image description (alt text)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Ingredient"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "info": "For example: Pigment support†"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Ingredients",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

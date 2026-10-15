@@ -1,0 +1,334 @@
+{%- liquid
+  assign s = section.settings
+  assign half = section.blocks.size | plus: 1 | divided_by: 2
+-%}
+<div
+  id="GlDiagram-{{ section.id }}"
+  class="gl gl-diagram gl--{{ s.tone }}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="gl-container gl-diagram__inner">
+    <div class="gl-diagram__content gl-reveal">
+      {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size -%}
+    </div>
+    <div class="gl-diagram__figure">
+      <ul class="gl-diagram__col gl-diagram__col--left" role="list">
+        {%- for block in section.blocks limit: half -%}
+          <li class="gl-callout gl-reveal" {{ block.shopify_attributes }}>
+            <span class="gl-chip gl-chip--ring">{%- render 'gl-icon', name: block.settings.icon -%}</span>
+            <h3 class="gl-callout__title">{{ block.settings.title | escape }}</h3>
+            <p class="gl-callout__text">{{ block.settings.text | escape }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="gl-diagram__image">
+        {%- render 'gl-image', image: s.image, alt: s.image_alt, sizes: '(min-width: 990px) 25vw, 60vw', class: 'gl-diagram__img', label: 'Diagram image, 1200 x 1200 px' -%}
+      </div>
+      <ul class="gl-diagram__col gl-diagram__col--right" role="list">
+        {%- for block in section.blocks offset: half -%}
+          <li class="gl-callout gl-reveal" {{ block.shopify_attributes }}>
+            <span class="gl-chip gl-chip--ring">{%- render 'gl-icon', name: block.settings.icon -%}</span>
+            <h3 class="gl-callout__title">{{ block.settings.title | escape }}</h3>
+            <p class="gl-callout__text">{{ block.settings.text | escape }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GL | Diagram",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Centre image",
+      "info": "1200 x 1200 px. Shown as a circle."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description (alt text)"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ink"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "hair",
+              "label": "Hair"
+            },
+            {
+              "value": "strands",
+              "label": "Strands"
+            },
+            {
+              "value": "people",
+              "label": "People"
+            },
+            {
+              "value": "molecule",
+              "label": "Molecule"
+            },
+            {
+              "value": "dna",
+              "label": "Dna"
+            },
+            {
+              "value": "flag",
+              "label": "Flag"
+            },
+            {
+              "value": "gmp",
+              "label": "Gmp"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "capsule",
+              "label": "Capsule"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "mountain",
+              "label": "Mountain"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "headset",
+              "label": "Headset"
+            },
+            {
+              "value": "document",
+              "label": "Document"
+            },
+            {
+              "value": "mail",
+              "label": "Mail"
+            },
+            {
+              "value": "check-circle",
+              "label": "Check circle"
+            }
+          ],
+          "default": "molecule"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Diagram",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

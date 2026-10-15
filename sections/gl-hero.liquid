@@ -1,0 +1,600 @@
+{%- liquid
+  assign s = section.settings
+  assign eager = false
+  if section.index == 1
+    assign eager = true
+  endif
+  assign benefits = section.blocks | where: 'type', 'benefit'
+  assign checks = section.blocks | where: 'type', 'check'
+  assign note = s.note
+  if s.product != blank and note contains '[price]'
+    assign from_price = s.product.price_min | money
+    assign note = note | replace: '[price]', from_price
+  endif
+-%}
+<div
+  id="GlHero-{{ section.id }}"
+  class="gl gl-hero gl--{{ s.tone }} gl-hero--{{ s.height }}{% if s.image == blank %} gl-hero--no-image{% endif %}"
+  style="--gl-fade: {{ s.fade | divided_by: 100.0 }}; --gl-focus: {{ s.focus }}%;"
+>
+  <div class="gl-hero__media">
+    {%- render 'gl-image', image: s.image, image_mobile: s.image_mobile, alt: s.image_alt, sizes: '100vw', eager: eager, class: 'gl-hero__image', label: 'Hero image, 2400 x 1300 px' -%}
+    {%- if s.script_text != blank -%}
+      <p class="gl-script gl-hero__script">{{ s.script_text | escape | newline_to_br }}</p>
+    {%- endif -%}
+    {%- if s.badge_main != blank -%}
+      <p class="gl-hero__badge">
+        {%- if s.badge_top != blank -%}<span class="gl-hero__badge-top">{{ s.badge_top | escape }}</span>{%- endif -%}
+        <span class="gl-hero__badge-main">{{ s.badge_main | escape }}</span>
+        {%- if s.badge_sub != blank -%}<span class="gl-hero__badge-sub">{{ s.badge_sub | escape | newline_to_br }}</span>{%- endif -%}
+      </p>
+    {%- endif -%}
+  </div>
+  <div class="gl-container gl-hero__inner">
+    <div class="gl-hero__content">
+      {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size -%}
+      {%- if checks.size > 0 -%}
+        <ul class="gl-ticks gl-hero__ticks" role="list">
+          {%- for block in checks -%}
+            <li {{ block.shopify_attributes }}>{%- render 'gl-icon', name: 'leaf' -%}<span>{{ block.settings.text | escape }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if benefits.size > 0 -%}
+        <ul class="gl-chips gl-chips--hero" role="list" style="--gl-cols: {{ benefits.size }};">
+          {%- for block in benefits -%}
+            <li class="gl-chips__item" {{ block.shopify_attributes }}>
+              <span class="gl-chip">{%- render 'gl-icon', name: block.settings.icon -%}</span>
+              <span class="gl-chips__label">{{ block.settings.text | escape | newline_to_br }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if s.button_label != blank or s.link_label != blank -%}
+        <div class="gl-actions">
+          {%- render 'gl-button', label: s.button_label, url: s.button_url -%}
+          {%- if s.link_label != blank and s.link_url != blank -%}
+            <a class="gl-link" href="{{ s.link_url }}">{{ s.link_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if note != blank -%}
+        <p class="gl-hero__note">{%- render 'gl-icon', name: s.note_icon -%}<span>{{ note | escape }}</span></p>
+      {%- endif -%}
+    </div>
+    {%- if s.caption != blank -%}
+      <p class="gl-hero__caption">{{ s.caption | escape | newline_to_br }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GL | Hero",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "2400 x 1300 px. Keep the left half calm so the text stays readable."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image on phones",
+      "info": "1200 x 1000 px. Optional."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description (alt text)"
+    },
+    {
+      "type": "range",
+      "id": "fade",
+      "label": "Dark overlay on the photo",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 90,
+      "info": "Keeps the text readable over the photo."
+    },
+    {
+      "type": "range",
+      "id": "focus",
+      "label": "Photo focus",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 70,
+      "info": "Which part of the photo stays in view when it is cropped. 0 is the left edge, 100 the right."
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "bottles",
+          "label": "Large, keep the bottles fully in view"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ink"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_end",
+      "label": "Heading, line after the gold one"
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h1",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "xl"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "dark",
+          "label": "Black"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "gold"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Text link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Text link"
+    },
+    {
+      "type": "header",
+      "content": "Under the buttons"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (for the price)"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Small line",
+      "info": "Use [price] for the lowest price of the product, for example \"From [price] · 2 capsules a day\"."
+    },
+    {
+      "type": "select",
+      "id": "note_icon",
+      "label": "Small line icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "hair",
+          "label": "Hair"
+        },
+        {
+          "value": "strands",
+          "label": "Strands"
+        },
+        {
+          "value": "people",
+          "label": "People"
+        },
+        {
+          "value": "molecule",
+          "label": "Molecule"
+        },
+        {
+          "value": "dna",
+          "label": "Dna"
+        },
+        {
+          "value": "flag",
+          "label": "Flag"
+        },
+        {
+          "value": "gmp",
+          "label": "Gmp"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "capsule",
+          "label": "Capsule"
+        },
+        {
+          "value": "calendar",
+          "label": "Calendar"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "sparkle",
+          "label": "Sparkle"
+        },
+        {
+          "value": "sun",
+          "label": "Sun"
+        },
+        {
+          "value": "mountain",
+          "label": "Mountain"
+        },
+        {
+          "value": "drop",
+          "label": "Drop"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "chat",
+          "label": "Chat"
+        },
+        {
+          "value": "headset",
+          "label": "Headset"
+        },
+        {
+          "value": "document",
+          "label": "Document"
+        },
+        {
+          "value": "mail",
+          "label": "Mail"
+        },
+        {
+          "value": "check-circle",
+          "label": "Check circle"
+        }
+      ],
+      "default": "capsule"
+    },
+    {
+      "type": "header",
+      "content": "Extras"
+    },
+    {
+      "type": "textarea",
+      "id": "script_text",
+      "label": "Italic line over the photo",
+      "info": "Desktop only."
+    },
+    {
+      "type": "textarea",
+      "id": "caption",
+      "label": "Small caption on the right",
+      "info": "Desktop only. Short lines in capitals."
+    },
+    {
+      "type": "text",
+      "id": "badge_top",
+      "label": "Round badge, top text"
+    },
+    {
+      "type": "text",
+      "id": "badge_main",
+      "label": "Round badge, main text",
+      "info": "Leave empty to hide the badge."
+    },
+    {
+      "type": "text",
+      "id": "badge_sub",
+      "label": "Round badge, bottom text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "hair",
+              "label": "Hair"
+            },
+            {
+              "value": "strands",
+              "label": "Strands"
+            },
+            {
+              "value": "people",
+              "label": "People"
+            },
+            {
+              "value": "molecule",
+              "label": "Molecule"
+            },
+            {
+              "value": "dna",
+              "label": "Dna"
+            },
+            {
+              "value": "flag",
+              "label": "Flag"
+            },
+            {
+              "value": "gmp",
+              "label": "Gmp"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "capsule",
+              "label": "Capsule"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "mountain",
+              "label": "Mountain"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "headset",
+              "label": "Headset"
+            },
+            {
+              "value": "document",
+              "label": "Document"
+            },
+            {
+              "value": "mail",
+              "label": "Mail"
+            },
+            {
+              "value": "check-circle",
+              "label": "Check circle"
+            }
+          ],
+          "default": "hair"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Supports Natural Hair Pigment†"
+        }
+      ]
+    },
+    {
+      "type": "check",
+      "name": "Checklist item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "For adult men & women"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Hero",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

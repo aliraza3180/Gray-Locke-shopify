@@ -1,0 +1,346 @@
+{
+  "sections": {
+    "hero": {
+      "type": "gl-hero",
+      "settings": {
+        "image": "shopify://shop_images/gl-faq-hero.jpg",
+        "image_mobile": "shopify://shop_images/gl-faq-hero-mobile.jpg",
+        "fade": 90,
+        "focus": 70,
+        "height": "large",
+        "tone": "ink",
+        "heading_tag": "h1",
+        "heading_size": "xl",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop",
+        "eyebrow": "Brand Name FAQ",
+        "heading": "Answers\nfor a More",
+        "heading_accent": "Vibrant You.",
+        "text": "<p>Real questions. Honest answers. Everything you need to know about Brand Name, our ingredients, usage and more.</p>",
+        "caption": "Nature.\nNutrition.\nAnswers.\nA brighter you.\n\nFor him.\nFor her.\nFor every stage."
+      }
+    },
+    "trust": {
+      "type": "gl-trust-bar",
+      "blocks": {
+        "item_001": {
+          "type": "item",
+          "settings": {
+            "icon": "flag",
+            "text": "Made in USA\nwith Global Ingredients"
+          }
+        },
+        "item_002": {
+          "type": "item",
+          "settings": {
+            "icon": "gmp",
+            "text": "Sourced from a\nGMP Certified Facility"
+          }
+        },
+        "item_003": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "16 Powerful\nIngredients"
+          }
+        },
+        "item_004": {
+          "type": "item",
+          "settings": {
+            "icon": "molecule",
+            "text": "Fueled by\nScience®"
+          }
+        },
+        "item_005": {
+          "type": "item",
+          "settings": {
+            "icon": "people",
+            "text": "For Adult\nMen & Women"
+          }
+        }
+      },
+      "block_order": [
+        "item_001",
+        "item_002",
+        "item_003",
+        "item_004",
+        "item_005"
+      ],
+      "settings": {
+        "label": "Product highlights",
+        "heading": "",
+        "tone": "champagne",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "faq": {
+      "type": "gl-faq",
+      "blocks": {
+        "category_006": {
+          "type": "category",
+          "settings": {
+            "title": "General"
+          }
+        },
+        "question_007": {
+          "type": "question",
+          "settings": {
+            "question": "What is Brand Name?",
+            "answer": "<p>Brand Name is a daily nutritional supplement formulated for men and women who want to support natural hair pigmentation, healthy-looking hair and overall hair vitality. Its formula combines vitamins, minerals, amino acids and botanical ingredients selected to provide nutritional support for your hair from within.†</p>"
+          }
+        },
+        "question_008": {
+          "type": "question",
+          "settings": {
+            "question": "How does Brand Name support natural hair pigment?",
+            "answer": "<p>Brand Name provides nutrients involved in normal hair health and pigmentation, including copper, along with Catalase Complex and a blend of vitamins, minerals and botanicals. Copper contributes to normal hair pigmentation, while the complete formula provides broader nutritional support for healthy hair.†</p>"
+          }
+        },
+        "question_009": {
+          "type": "question",
+          "settings": {
+            "question": "Who is Brand Name for?",
+            "answer": "<p>Brand Name is designed for adult men and women who want nutritional support for natural hair pigmentation and healthier, more vibrant-looking hair. It can be incorporated into a daily wellness routine at virtually any stage of adult life.</p>"
+          }
+        },
+        "category_00a": {
+          "type": "category",
+          "settings": {
+            "title": "Usage & Results"
+          }
+        },
+        "question_00b": {
+          "type": "question",
+          "settings": {
+            "question": "How do I take Brand Name?",
+            "answer": "<p>2 capsules daily preferably with meals or as directed by a healthcare professional. Each bottle of 120 capsules provides 60 servings.</p>"
+          }
+        },
+        "question_00c": {
+          "type": "question",
+          "settings": {
+            "question": "How long does it take to see results?",
+            "answer": "<p>Hair changes gradually, and individual experiences can vary based on factors such as age, nutrition, genetics and overall health. Brand Name is designed as ongoing nutritional support rather than a quick cosmetic treatment, so consistency is important. We do not promise a specific timeframe or guarantee a particular change in hair color.</p>"
+          }
+        },
+        "question_00d": {
+          "type": "question",
+          "settings": {
+            "question": "Do I need to take it continuously?",
+            "answer": "<p>Brand Name is formulated for consistent daily nutritional support. Because hair growth and normal biological processes occur over time, regular use according to the label directions is recommended. Whether you choose to continue long term is ultimately a personal decision based on your individual needs.</p>"
+          }
+        },
+        "category_00e": {
+          "type": "category",
+          "settings": {
+            "title": "Ingredients"
+          }
+        },
+        "question_00f": {
+          "type": "question",
+          "settings": {
+            "question": "What are the key ingredients in Brand Name?",
+            "answer": "<p>Brand Name combines key nutrients including Vitamin B6, folate, biotin, pantothenic acid, zinc and copper with a proprietary blend featuring Saw Palmetto, PABA, L-Tyrosine, Horsetail, Plant Sterols, Nettle Root, Catalase Complex, Chlorella, Fo-Ti and Barley Grass. Visit our <a href=\"/pages/ingredients\">Ingredients page</a> for a closer look at the complete formula.†</p>"
+          }
+        },
+        "category_00g": {
+          "type": "category",
+          "settings": {
+            "title": "Safety"
+          }
+        },
+        "question_00h": {
+          "type": "question",
+          "settings": {
+            "question": "Is Brand Name safe to take?",
+            "answer": "<p>Brand Name is intended for use by healthy adults when taken according to label directions. As with any dietary supplement, consult your healthcare professional before use if you are pregnant or nursing, have a medical condition, take medications or have questions about whether Brand Name is appropriate for you.</p>"
+          }
+        },
+        "question_00i": {
+          "type": "question",
+          "settings": {
+            "question": "Are there any side effects?",
+            "answer": "<p>Individual responses to dietary supplements can vary. If you experience an unwanted reaction, discontinue use and consult your healthcare professional. Always review the product label, ingredient list and allergen information before use.</p>"
+          }
+        },
+        "question_00j": {
+          "type": "question",
+          "settings": {
+            "question": "Can I take Brand Name with other supplements?",
+            "answer": "<p>Brand Name contains multiple vitamins, minerals and botanical ingredients, so it’s important to consider your total daily intake from other supplements. If you take medications or other dietary supplements, talk with your healthcare professional before combining them.</p>"
+          }
+        },
+        "question_00k": {
+          "type": "question",
+          "settings": {
+            "question": "Does Brand Name contain any allergens?",
+            "answer": "<p>Brand Name contains soy and wheat (barley grass). This product is manufactured and packaged in a facility which may also process milk, soy, wheat, egg, peanuts, tree nuts, fish and crustacean shellfish.</p>"
+          }
+        },
+        "category_00l": {
+          "type": "category",
+          "settings": {
+            "title": "For Men & Women"
+          }
+        },
+        "question_00m": {
+          "type": "question",
+          "settings": {
+            "question": "Is Brand Name suitable for both men and women?",
+            "answer": "<p>Yes. Brand Name was developed for both adult men and women. Hair pigmentation and hair health are relevant to both, which is why the same Brand Name formula is designed to provide nutritional support regardless of gender.†</p>"
+          }
+        },
+        "category_00n": {
+          "type": "category",
+          "settings": {
+            "title": "Ordering & Shipping"
+          }
+        },
+        "question_00o": {
+          "type": "question",
+          "settings": {
+            "question": "Where is Brand Name made?",
+            "answer": "<p>Brand Name is made in the USA with globally sourced ingredients. We select ingredients based on formula requirements and quality rather than limiting sourcing to a single country.</p>"
+          }
+        },
+        "question_00p": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship to my address?",
+            "answer": "<p>We ship to addresses within the United States, and shipping is free on all orders placed through our website, with no minimum purchase. See our <a href=\"/pages/shipping-policy\">Shipping Policy</a>.</p>"
+          }
+        },
+        "question_00q": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We stand behind our products with a 30-day satisfaction guarantee. It applies to your first purchase of a product and is limited to one refund per customer or household. See the <a href=\"/pages/satisfaction-guarantee\">30-Day Satisfaction Guarantee</a> page for how to request it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_006",
+        "question_007",
+        "question_008",
+        "question_009",
+        "category_00a",
+        "question_00b",
+        "question_00c",
+        "question_00d",
+        "category_00e",
+        "question_00f",
+        "category_00g",
+        "question_00h",
+        "question_00i",
+        "question_00j",
+        "question_00k",
+        "category_00l",
+        "question_00m",
+        "category_00n",
+        "question_00o",
+        "question_00p",
+        "question_00q"
+      ],
+      "settings": {
+        "head_align": "",
+        "show_tabs": true,
+        "tabs_label": "Question categories",
+        "all_label": "All Questions",
+        "count_label": "questions shown",
+        "quote": "Better information today.\nA brighter you tomorrow.",
+        "structured_data": true,
+        "product": "brand-name",
+        "card_variant_position": 2,
+        "card_title": "Real Questions.\nReal Answers.",
+        "card_text": "Supports natural hair pigment, healthy-looking hair and overall vitality.†",
+        "card_image": "shopify://shop_images/gl-bottle-120.png",
+        "card_image_alt": "Brand Name Anti-Gray & Pigment Support, 120 capsule bottle",
+        "card_button_label": "Add to Cart",
+        "eyebrow": "Clear answers. Greater confidence.",
+        "heading": "Frequently Asked Questions",
+        "heading_tag": "h2",
+        "heading_size": "lg",
+        "tone": "ivory",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "support": {
+      "type": "gl-columns",
+      "blocks": {
+        "column_00r": {
+          "type": "column",
+          "settings": {
+            "icon": "chat",
+            "title": "Still have a question?",
+            "text": "<p>We’re here to help. Our team is happy to answer any additional questions you may have.</p>",
+            "button_label": "Contact Us",
+            "button_url": "shopify://pages/contact"
+          }
+        },
+        "column_00s": {
+          "type": "column",
+          "settings": {
+            "icon": "headset",
+            "title": "Customer support",
+            "text": "<p>Send us a message and our team will get back to you.</p>",
+            "link_label": "Contact form",
+            "link_url": "shopify://pages/contact"
+          }
+        },
+        "column_00t": {
+          "type": "column",
+          "settings": {
+            "icon": "document",
+            "title": "Additional resources",
+            "text": "<p>Explore our Ingredients and Science pages to learn more about how Brand Name works.</p>",
+            "link_label": "Visit the Science page",
+            "link_url": "shopify://pages/science"
+          }
+        }
+      },
+      "block_order": [
+        "column_00r",
+        "column_00s",
+        "column_00t"
+      ],
+      "settings": {
+        "style": "support",
+        "tone": "cream",
+        "heading_tag": "h2",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "closing": {
+      "type": "gl-band",
+      "settings": {
+        "layout": "cta",
+        "image": "shopify://shop_images/gl-mountains.jpg",
+        "image_mobile": "shopify://shop_images/gl-mountains-mobile.jpg",
+        "fade": 55,
+        "focus": 50,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": false,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "heading": "Nature Gives Us Questions.\nScience Gives Us Answers.",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop",
+        "side_text": "Confidence looks good on you.",
+        "logo": "shopify://shop_images/gl-logo.png",
+        "caption": "Brand Name\nInspired by Nature. Fueled by Science.®"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "faq",
+    "support",
+    "closing"
+  ]
+}

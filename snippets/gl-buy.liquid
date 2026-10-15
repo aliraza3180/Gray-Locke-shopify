@@ -1,0 +1,73 @@
+{%- doc -%}
+  Add to cart form for one fixed variant, used on the "GL |" size cards.
+  Uses the theme's own product form component, so the cart drawer and the cart count
+  update exactly as they do on the product page.
+
+  @param {object} product - The product
+  @param {object} variant - The variant this button adds
+  @param {string} form_id - Unique id for the form
+  @param {string} section_id - Id of the section the form sits in
+  @param {string} [label] - Button text. Defaults to the theme's "Add to cart"
+  @param {boolean} [show_quantity] - Show the quantity stepper beside the button
+
+  @example
+  {% render 'gl-buy', product: product, variant: variant, form_id: form_id, section_id: section.id, label: 'Add to Cart' %}
+{%- enddoc -%}
+{%- liquid
+  assign default_label = 'actions.add_to_cart' | t
+  assign fly_image = variant.featured_media.preview_image | default: product.featured_media.preview_image
+-%}
+<product-form-component
+  class="gl-buy{% if show_quantity %} gl-buy--qty{% endif %}"
+  data-section-id="{{ section_id }}"
+  data-product-id="{{ product.id }}"
+  data-product-url="{{ product.url }}"
+  data-quantity-default="1"
+  data-quantity-error-max="{{ 'products.product.quantity_error_max' | t | escape }}"
+  on:submit="/handleSubmit"
+>
+  <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+  {%- form 'product', product, id: form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <input type="hidden" name="id" ref="variantId" value="{{ variant.id }}">
+    <div class="product-form-buttons gl-buy__row" ref="productFormButtons">
+      <span class="product-form-text__error hidden" ref="addToCartTextError">
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+      </span>
+      {%- if show_quantity -%}
+        {%- render 'quantity-selector', product: product, variant: variant, class: 'gl-buy__qty' -%}
+      {%- endif -%}
+      <add-to-cart-component
+        ref="addToCartButtonContainer"
+        data-product-variant-media="{% if fly_image != blank %}{{ fly_image | image_url: width: 100 }}{% endif %}"
+        data-add-to-cart-animation="{{ settings.add_to_cart_animation }}"
+      >
+        <button
+          id="{{ form_id }}-button"
+          type="submit"
+          name="add"
+          ref="addToCartButton"
+          on:click="/handleClick"
+          class="button add-to-cart-button gl-buy__button"
+          {% unless variant.available %}
+            disabled
+          {% endunless %}
+        >
+          {%- if variant.available -%}
+            <span class="gl-buy__label">{{ label | default: default_label | escape }}</span>
+            {%- render 'gl-icon', name: 'arrow' -%}
+          {%- else -%}
+            <span class="gl-buy__label">{{ 'products.product.sold_out' | t }}</span>
+          {%- endif -%}
+          <span class="visually-hidden">: {{ product.title | escape }}, {{ variant.title | escape }}</span>
+          <span class="add-to-cart__added">
+            <span class="svg-wrapper add-to-cart__added-icon">
+              {{- 'icon-checkmark-burst.svg' | inline_asset_content -}}
+            </span>
+          </span>
+        </button>
+      </add-to-cart-component>
+    </div>
+  {%- endform -%}
+</product-form-component>

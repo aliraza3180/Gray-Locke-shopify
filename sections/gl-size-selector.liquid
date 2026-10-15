@@ -1,0 +1,563 @@
+{%- liquid
+  assign s = section.settings
+  assign product = s.product
+  assign options = section.blocks | where: 'type', 'option'
+  assign assurances = section.blocks | where: 'type', 'assurance'
+  assign title_tag = 'h3'
+  if s.heading == blank and s.heading_accent == blank and s.heading_end == blank
+    assign title_tag = 'h2'
+  endif
+  assign anchor = 'GlSizes-' | append: section.id
+  if s.anchor != blank
+    assign anchor = s.anchor | handle
+  endif
+-%}
+<div
+  id="{{ anchor }}"
+  class="gl gl-sizes gl--{{ s.tone }}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px; --gl-cols: {{ options.size | at_least: 1 }};"
+>
+  <div class="gl-container gl-sizes__inner">
+    {%- if s.heading != blank or s.heading_accent != blank or s.eyebrow != blank or s.text != blank -%}
+      {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, text: s.text, tag: s.heading_tag, size: s.heading_size, class: 'gl-head--center' -%}
+    {%- endif -%}
+    <ul class="gl-sizes__cards" role="list">
+      {%- for block in options -%}
+        {%- liquid
+          assign b = block.settings
+          assign index = b.variant_position | minus: 1
+          assign variant = product.variants[index]
+          assign title = b.title | default: variant.title
+          comment
+            No fallback to the product's main image: it is the 120-count bottle and must never stand in for another size.
+          endcomment
+          assign image = b.image | default: variant.featured_image
+          assign form_id = 'GlBuy-' | append: section.id | append: '-' | append: forloop.index
+          assign check_lines = b.checks | newline_to_br | split: '<br />'
+          assign per_day = nil
+          if variant and b.days > 0
+            assign per_day = variant.price | times: 1.0 | divided_by: b.days | round
+          endif
+          assign save = 0
+          if variant and b.save_vs_position > 0
+            assign other_index = b.save_vs_position | minus: 1
+            assign other = product.variants[other_index]
+            if other
+              assign save = other.price | times: b.save_multiplier | minus: variant.price
+            endif
+          endif
+          assign save_money = save | money
+          assign save_line = b.save_text | replace: '[amount]', save_money
+        -%}
+        <li class="gl-size{% if b.badge != blank %} gl-size--badged{% endif %} gl-reveal" {{ block.shopify_attributes }}>
+          {%- if b.badge != blank -%}
+            <p class="gl-size__badge">{{ b.badge | escape }}</p>
+          {%- endif -%}
+          <div class="gl-size__card">
+            <div class="gl-size__media">
+              {%- render 'gl-image', image: image, alt: b.image_alt, sizes: '(min-width: 990px) 16vw, 45vw', class: 'gl-size__image', label: 'Bottle image' -%}
+            </div>
+            <div class="gl-size__body">
+              <{{ title_tag }} class="gl-size__title">{{ title | escape }}</{{ title_tag }}>
+              {%- if b.text != blank -%}
+                <p class="gl-size__text">{{ b.text | escape }}</p>
+              {%- endif -%}
+              <p class="gl-size__price">
+                <span class="visually-hidden">Price:</span>
+                {%- if variant -%}
+                  {%- if variant.compare_at_price > variant.price -%}
+                    <s class="gl-size__compare"><span class="visually-hidden">Regular price</span> {{ variant.compare_at_price | money }}</s>
+                  {%- endif -%}
+                  {{ variant.price | money }}
+                {%- else -%}
+                  {{ s.price_pending_text | escape }}
+                {%- endif -%}
+              </p>
+              {%- if per_day or save > 0 -%}
+                <p class="gl-size__value">
+                  {%- if per_day -%}<span>{{ per_day | money }} a day</span>{%- endif -%}
+                  {%- if save > 0 and save_line != blank -%}<span class="gl-size__save">{{ save_line | escape }}</span>{%- endif -%}
+                </p>
+              {%- endif -%}
+              {%- if check_lines.size > 0 and b.checks != blank -%}
+                <ul class="gl-ticks gl-size__checks" role="list">
+                  {%- for line in check_lines -%}
+                    {%- assign line_text = line | strip -%}
+                    {%- if line_text != blank -%}
+                      <li>{%- render 'gl-icon', name: 'leaf' -%}<span>{{ line_text | escape }}</span></li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+            <div class="gl-size__buy">
+              {%- if s.button_mode == 'cart' and variant -%}
+                {%- render 'gl-buy', product: product, variant: variant, form_id: form_id, section_id: section.id, label: s.button_label, show_quantity: s.show_quantity -%}
+              {%- else -%}
+                {%- render 'gl-button', label: s.button_label, url: s.button_url, class: 'gl-btn--full' -%}
+              {%- endif -%}
+            </div>
+            {%- if s.details_label != blank and product != blank and variant -%}
+              <a class="gl-link gl-size__details" href="{{ variant.url }}">
+                {{- s.details_label | escape -}}
+                <span class="visually-hidden">: {{ title | escape }}</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if assurances.size > 0 -%}
+      <ul class="gl-assure" role="list">
+        {%- for item in assurances -%}
+          <li {{ item.shopify_attributes }}>
+            {%- render 'gl-icon', name: item.settings.icon -%}
+            {%- if item.settings.link != blank -%}
+              <a href="{{ item.settings.link }}">{{ item.settings.text | escape }}</a>
+            {%- else -%}
+              <span>{{ item.settings.text | escape }}</span>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</div>
+{%- if s.button_mode == 'cart' and product != blank -%}
+  {%- render 'add-to-cart-button-styles' -%}
+  {%- render 'buy-buttons-styles' -%}
+  {%- render 'fly-to-cart-styles' -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "GL | Size Selector",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Prices and availability come from the product."
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "header",
+      "content": "Card button"
+    },
+    {
+      "type": "select",
+      "id": "button_mode",
+      "label": "Button action",
+      "options": [
+        {
+          "value": "cart",
+          "label": "Add to cart"
+        },
+        {
+          "value": "link",
+          "label": "Link"
+        }
+      ],
+      "default": "cart"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link",
+      "info": "Used when the action is \"Link\"."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity buttons",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "details_label",
+      "label": "Product page link label",
+      "info": "Leave empty to hide the link."
+    },
+    {
+      "type": "text",
+      "id": "price_pending_text",
+      "label": "Text shown when there is no price",
+      "default": "$XX.XX"
+    },
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor name",
+      "info": "Lets buttons jump here, for example \"shop\" for a link ending in #shop."
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "cream"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Size card",
+      "settings": [
+        {
+          "type": "range",
+          "id": "variant_position",
+          "label": "Size (position in the product)",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "info": "Leave empty to use the size name."
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Line under the title",
+          "info": "For example: 1-month supply"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "info": "For example: Best Value"
+        },
+        {
+          "type": "range",
+          "id": "days",
+          "label": "Days of supply",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 0,
+          "info": "Shows the price per day. 0 hides it."
+        },
+        {
+          "type": "range",
+          "id": "save_vs_position",
+          "label": "Compare with size",
+          "min": 0,
+          "max": 6,
+          "step": 1,
+          "default": 0,
+          "info": "0 hides the saving line."
+        },
+        {
+          "type": "range",
+          "id": "save_multiplier",
+          "label": "How many of that size",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 2,
+          "info": "For example 2 to compare one 120 with two 60s."
+        },
+        {
+          "type": "text",
+          "id": "save_text",
+          "label": "Saving line",
+          "default": "Save [amount]",
+          "info": "[amount] is worked out from the product prices."
+        },
+        {
+          "type": "textarea",
+          "id": "checks",
+          "label": "Checklist",
+          "info": "One line per item."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Leave empty to use the image of the size."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image description (alt text)"
+        }
+      ]
+    },
+    {
+      "type": "assurance",
+      "name": "Reassurance line",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "hair",
+              "label": "Hair"
+            },
+            {
+              "value": "strands",
+              "label": "Strands"
+            },
+            {
+              "value": "people",
+              "label": "People"
+            },
+            {
+              "value": "molecule",
+              "label": "Molecule"
+            },
+            {
+              "value": "dna",
+              "label": "Dna"
+            },
+            {
+              "value": "flag",
+              "label": "Flag"
+            },
+            {
+              "value": "gmp",
+              "label": "Gmp"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "capsule",
+              "label": "Capsule"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "mountain",
+              "label": "Mountain"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "headset",
+              "label": "Headset"
+            },
+            {
+              "value": "document",
+              "label": "Document"
+            },
+            {
+              "value": "mail",
+              "label": "Mail"
+            },
+            {
+              "value": "check-circle",
+              "label": "Check circle"
+            }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Fast & Secure Shipping"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Size Selector",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

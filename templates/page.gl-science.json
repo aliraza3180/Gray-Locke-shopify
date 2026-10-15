@@ -1,0 +1,280 @@
+{
+  "sections": {
+    "hero": {
+      "type": "gl-hero",
+      "settings": {
+        "image": "shopify://shop_images/gl-science-hero.jpg",
+        "image_mobile": "shopify://shop_images/gl-science-hero-mobile.jpg",
+        "fade": 90,
+        "focus": 70,
+        "height": "large",
+        "tone": "ink",
+        "heading_tag": "h1",
+        "heading_size": "xl",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop",
+        "eyebrow": "Brand Name The Science",
+        "heading": "Real Science\nfor Naturally",
+        "heading_accent": "Vibrant Hair.",
+        "text": "<p>Brand Name is built around the nutrition behind hair pigmentation and hair health, combining key nutrients and botanical extracts that work together to support your natural hair color and overall hair vitality.†</p>",
+        "caption": "Nature.\nNutrition.\nScience.\nA brighter you.\n\nFor him.\nFor her.\nFor every stage."
+      }
+    },
+    "trust": {
+      "type": "gl-trust-bar",
+      "blocks": {
+        "item_001": {
+          "type": "item",
+          "settings": {
+            "icon": "flag",
+            "text": "Made in USA\nwith Global Ingredients"
+          }
+        },
+        "item_002": {
+          "type": "item",
+          "settings": {
+            "icon": "gmp",
+            "text": "Sourced from a\nGMP Certified Facility"
+          }
+        },
+        "item_003": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "16 Powerful\nIngredients"
+          }
+        },
+        "item_004": {
+          "type": "item",
+          "settings": {
+            "icon": "molecule",
+            "text": "Fueled by\nScience®"
+          }
+        },
+        "item_005": {
+          "type": "item",
+          "settings": {
+            "icon": "people",
+            "text": "For Adult\nMen & Women"
+          }
+        }
+      },
+      "block_order": [
+        "item_001",
+        "item_002",
+        "item_003",
+        "item_004",
+        "item_005"
+      ],
+      "settings": {
+        "label": "Product highlights",
+        "heading": "",
+        "tone": "champagne",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "behind": {
+      "type": "gl-columns",
+      "blocks": {
+        "column_006": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/gl-science-strand.jpg",
+            "image_alt": "Close-up of a dark hair strand",
+            "title": "Supports Natural Hair Pigmentation†",
+            "text": "<p>Key nutrients like Copper, a Catalase Complex and B vitamins are included to support the nutrition behind natural hair pigment.</p>"
+          }
+        },
+        "column_007": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/gl-science-dew.jpg",
+            "image_alt": "Dew drops on a green leaf",
+            "title": "Antioxidant Support†",
+            "text": "<p>Catalase is an antioxidant enzyme, and the formula adds zinc and plant extracts for everyday antioxidant support.</p>"
+          }
+        },
+        "column_008": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/gl-science-flatlay.jpg",
+            "image_alt": "Copper, biotin and botanicals laid out on stone",
+            "title": "Nourishes Hair from Within†",
+            "text": "<p>Vitamins, minerals and botanicals work together to give your hair everyday nutritional support from the inside.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_006",
+        "column_007",
+        "column_008"
+      ],
+      "settings": {
+        "style": "cards",
+        "tone": "ivory",
+        "eyebrow": "Targeted nutritional support for your natural hair pigment",
+        "heading": "The Science Behind Brand Name",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "text": "<p>Brand Name combines nutrients, minerals and botanical extracts that support the key processes involved in hair pigmentation, follicle health and overall hair vitality.†</p>",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "follicle": {
+      "type": "gl-diagram",
+      "blocks": {
+        "callout_009": {
+          "type": "callout",
+          "settings": {
+            "icon": "hair",
+            "title": "Melanin",
+            "text": "The natural pigment made in the hair follicle that gives hair its color."
+          }
+        },
+        "callout_00a": {
+          "type": "callout",
+          "settings": {
+            "icon": "molecule",
+            "title": "Copper",
+            "text": "A trace mineral that contributes to normal hair pigmentation.†"
+          }
+        },
+        "callout_00b": {
+          "type": "callout",
+          "settings": {
+            "icon": "dna",
+            "title": "L-Tyrosine",
+            "text": "An amino acid the body uses in making melanin."
+          }
+        },
+        "callout_00c": {
+          "type": "callout",
+          "settings": {
+            "icon": "drop",
+            "title": "Catalase",
+            "text": "An antioxidant enzyme included in the formula for antioxidant support.†"
+          }
+        }
+      },
+      "block_order": [
+        "callout_009",
+        "callout_00a",
+        "callout_00b",
+        "callout_00c"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/gl-science-follicle.jpg",
+        "image_alt": "Illustration of a hair follicle in gold on black",
+        "tone": "ink",
+        "eyebrow": "A simple look",
+        "heading": "How Hair\nGets Its Color",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "text": "<p>Hair color comes from a natural pigment called melanin. Here is where the nutrients in Brand Name fit in.†</p>",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "quote": {
+      "type": "gl-band",
+      "settings": {
+        "layout": "center",
+        "image": "shopify://shop_images/gl-science-botanical.jpg",
+        "image_mobile": "shopify://shop_images/gl-science-botanical-mobile.jpg",
+        "fade": 55,
+        "focus": 50,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": true,
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "heading": "“Better Nutrients.\nBrighter Possibilities.”",
+        "subline": "Real ingredients. Thoughtful formulation."
+      }
+    },
+    "pillars": {
+      "type": "gl-columns",
+      "blocks": {
+        "column_00d": {
+          "type": "column",
+          "settings": {
+            "icon": "dna",
+            "title": "Nutritional Synergy",
+            "text": "<p>Each ingredient is carefully selected for its role in hair health and pigmentation support.†</p>"
+          }
+        },
+        "column_00e": {
+          "type": "column",
+          "settings": {
+            "icon": "molecule",
+            "title": "Thoughtfully Formulated",
+            "text": "<p>Made with traditionally used ingredients and key nutrients in one daily formula.</p>"
+          }
+        },
+        "column_00f": {
+          "type": "column",
+          "settings": {
+            "icon": "leaf",
+            "title": "Nature Meets Science",
+            "text": "<p>Botanical extracts and essential nutrients work together for comprehensive support.†</p>"
+          }
+        },
+        "column_00g": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "title": "A Healthier Tomorrow",
+            "text": "<p>Support your hair today and invest in your confidence for tomorrow.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_00d",
+        "column_00e",
+        "column_00f",
+        "column_00g"
+      ],
+      "settings": {
+        "style": "pillars",
+        "tone": "ivory",
+        "heading_tag": "h2",
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "closing": {
+      "type": "gl-band",
+      "settings": {
+        "layout": "cta",
+        "image": "shopify://shop_images/gl-mountains.jpg",
+        "image_mobile": "shopify://shop_images/gl-mountains-mobile.jpg",
+        "fade": 55,
+        "focus": 50,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": false,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "heading": "Science Today.\nBrighter Tomorrows.",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop",
+        "side_text": "Confidence looks good on you.",
+        "logo": "shopify://shop_images/gl-logo.png",
+        "caption": "Inspired by Nature. Fueled by Science.®"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "behind",
+    "follicle",
+    "quote",
+    "pillars",
+    "closing"
+  ]
+}

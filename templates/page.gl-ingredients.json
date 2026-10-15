@@ -1,0 +1,300 @@
+{
+  "sections": {
+    "hero": {
+      "type": "gl-hero",
+      "settings": {
+        "image": "shopify://shop_images/gl-ingredients-hero.jpg",
+        "image_mobile": "shopify://shop_images/gl-ingredients-hero-mobile.jpg",
+        "fade": 90,
+        "focus": 70,
+        "height": "large",
+        "tone": "ink",
+        "heading_tag": "h1",
+        "heading_size": "xl",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop",
+        "eyebrow": "Brand Name Ingredients",
+        "heading": "Powerful\nIngredients.",
+        "heading_accent": "Purposeful\nFormula.",
+        "text": "<p>A thoughtfully selected blend of vitamins, minerals and botanical extracts to support your natural hair pigment, hair health and overall vitality.†</p>",
+        "caption": "Nature.\nNutrition.\nConfidence\nat every stage."
+      }
+    },
+    "trust": {
+      "type": "gl-trust-bar",
+      "blocks": {
+        "item_001": {
+          "type": "item",
+          "settings": {
+            "icon": "flag",
+            "text": "Made in USA\nwith Global Ingredients"
+          }
+        },
+        "item_002": {
+          "type": "item",
+          "settings": {
+            "icon": "gmp",
+            "text": "Sourced from a\nGMP Certified Facility"
+          }
+        },
+        "item_003": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "16 Powerful\nIngredients"
+          }
+        },
+        "item_004": {
+          "type": "item",
+          "settings": {
+            "icon": "molecule",
+            "text": "Fueled by\nScience®"
+          }
+        },
+        "item_005": {
+          "type": "item",
+          "settings": {
+            "icon": "people",
+            "text": "For Adult\nMen & Women"
+          }
+        }
+      },
+      "block_order": [
+        "item_001",
+        "item_002",
+        "item_003",
+        "item_004",
+        "item_005"
+      ],
+      "settings": {
+        "label": "Product highlights",
+        "heading": "",
+        "tone": "champagne",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "blend": {
+      "type": "gl-ingredients",
+      "blocks": {
+        "ingredient_006": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-catalase.jpg",
+            "image_alt": "Catalase",
+            "name": "Catalase",
+            "role": "Pigment support†",
+            "text": "<p>An antioxidant enzyme complex at the centre of the formula, included to support natural hair pigment.</p>"
+          }
+        },
+        "ingredient_007": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-copper.jpg",
+            "image_alt": "Copper",
+            "name": "Copper",
+            "role": "Natural pigmentation†",
+            "text": "<p>An essential trace mineral that contributes to normal hair pigmentation.</p>"
+          }
+        },
+        "ingredient_008": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-saw-palmetto.jpg",
+            "image_alt": "Saw palmetto berries",
+            "name": "Saw Palmetto & Nettle Root",
+            "role": "Botanical support†",
+            "text": "<p>Traditionally used botanicals included to support a healthy hair environment.</p>"
+          }
+        },
+        "ingredient_009": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-biotin.jpg",
+            "image_alt": "Biotin",
+            "name": "Biotin",
+            "role": "Everyday hair nutrition†",
+            "text": "<p>A B vitamin included for nutritional support of healthy hair.</p>"
+          }
+        },
+        "ingredient_00a": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-zinc.jpg",
+            "image_alt": "Zinc",
+            "name": "Zinc",
+            "role": "Healthy hair†",
+            "text": "<p>An essential mineral included for everyday hair-health support.</p>"
+          }
+        },
+        "ingredient_00b": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/gl-ing-botanicals.jpg",
+            "image_alt": "Green botanical leaves",
+            "name": "Additional Botanicals",
+            "role": "Nutritional synergy†",
+            "text": "<p>Horsetail, PABA, L-Tyrosine, Plant Sterols, Chlorella, Fo-Ti and Barley Grass work together to provide nutritional support for your hair.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_006",
+        "ingredient_007",
+        "ingredient_008",
+        "ingredient_009",
+        "ingredient_00a",
+        "ingredient_00b"
+      ],
+      "settings": {
+        "layout": "around",
+        "columns": 3,
+        "image": "shopify://shop_images/gl-bottle-120.png",
+        "image_alt": "Brand Name Anti-Gray & Pigment Support, 120 capsule bottle",
+        "tone": "ivory",
+        "eyebrow": "Nature. Nutrition. Purpose.",
+        "heading": "A Closer Look at What’s Inside",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "text": "<p>Each ingredient in Brand Name is carefully selected for its role in supporting natural hair pigment, healthy hair and overall hair vitality.†</p>",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "formula": {
+      "type": "gl-facts",
+      "blocks": {
+        "role_00c": {
+          "type": "role",
+          "settings": {
+            "title": "Catalase Complex",
+            "text": "An antioxidant enzyme complex at the centre of the formula.",
+            "items": "Catalase Complex"
+          }
+        },
+        "role_00d": {
+          "type": "role",
+          "settings": {
+            "title": "Pigment Nutrients",
+            "text": "Copper and two building blocks linked to the hair’s natural pigment.",
+            "items": "Copper\nL-Tyrosine\nPABA"
+          }
+        },
+        "role_00e": {
+          "type": "role",
+          "settings": {
+            "title": "Daily Hair Nutrition",
+            "text": "B vitamins and zinc for everyday nutritional support.",
+            "items": "Biotin\nZinc\nVitamin B-6\nFolate\nPantothenic Acid"
+          }
+        },
+        "role_00f": {
+          "type": "role",
+          "settings": {
+            "title": "Botanicals",
+            "text": "Plant extracts with a long history of traditional use.",
+            "items": "Saw Palmetto\nStinging Nettle Root\nHorsetail\nPlant Sterols\nFo-Ti Root\nChlorella\nBarley Grass"
+          }
+        }
+      },
+      "block_order": [
+        "role_00c",
+        "role_00d",
+        "role_00e",
+        "role_00f"
+      ],
+      "settings": {
+        "tone": "cream",
+        "eyebrow": "Nothing hidden",
+        "heading": "The Full Formula",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "text": "<p>All 16 ingredients, grouped by the role they play, and the Supplement Facts exactly as printed on the bottle.</p>",
+        "facts_html": "<div class=\"gl-facts\"><table class=\"gl-facts__table\"><caption>Supplement Facts</caption><thead><tr><th scope=\"col\">Serving Size 2 Capsules<br>Servings Per Container: 60</th><th scope=\"col\">Amount Per Serving</th><th scope=\"col\">% Daily Value</th></tr></thead><tbody><tr><th scope=\"row\">Vitamin B-6 (as pyridoxine HCl)</th><td>10 mg</td><td>588%</td></tr><tr><th scope=\"row\">Folate</th><td>670 mcg DFE<br>(400 mcg folic acid)</td><td>167%</td></tr><tr><th scope=\"row\">Biotin</th><td>300 mcg</td><td>1,000%</td></tr><tr><th scope=\"row\">Pantothenic Acid (as calcium d-pantothenate)</th><td>300 mg</td><td>6,000%</td></tr><tr><th scope=\"row\">Zinc (as zinc oxide)</th><td>10 mg</td><td>91%</td></tr><tr><th scope=\"row\">Copper (as cupric oxide)</th><td>1 mg</td><td>111%</td></tr></tbody><tbody class=\"gl-facts__group\"><tr><th scope=\"row\">Brand Name Proprietary Blend<span class=\"gl-facts__parts\">Consisting of: Saw Palmetto Berries (45% extract), PABA (para-Aminobenzoic Acid), L-Tyrosine, Horsetail Aerial Parts (7% extract), Plant Sterol Complex (38-45% beta-sitosterol), Stinging Nettle Root 4:1 Extract, Catalase Complex, Chlorella Extract (2% chlorophyll), Fo-Ti Root Powder, Barley Grass Juice Powder.</span></th><td>1,124.3 mg</td><td>*</td></tr></tbody></table><p class=\"gl-facts__note\">*Daily Value not established.</p><p><strong>Other ingredients:</strong> Gelatin (bovine), vegetable magnesium stearate, and silicon dioxide.</p><p><strong>Allergen warning:</strong> Contains soy and wheat (barley grass).</p></div>",
+        "facts_note": "Per bottle of 120 capsules. 2 capsules daily preferably with meals or as directed by a healthcare professional.",
+        "padding_top": 104,
+        "padding_bottom": 104
+      }
+    },
+    "foundation": {
+      "type": "gl-band",
+      "blocks": {
+        "check_00g": {
+          "type": "check",
+          "settings": {
+            "text": "Made in USA with Global Ingredients"
+          }
+        },
+        "check_00h": {
+          "type": "check",
+          "settings": {
+            "text": "Sourced from a GMP Certified Facility"
+          }
+        },
+        "check_00i": {
+          "type": "check",
+          "settings": {
+            "text": "16 Powerful Ingredients"
+          }
+        },
+        "check_00j": {
+          "type": "check",
+          "settings": {
+            "text": "2 Capsules Daily"
+          }
+        }
+      },
+      "block_order": [
+        "check_00g",
+        "check_00h",
+        "check_00i",
+        "check_00j"
+      ],
+      "settings": {
+        "layout": "list",
+        "image": "shopify://shop_images/gl-leaf.jpg",
+        "image_mobile": "shopify://shop_images/gl-leaf-mobile.jpg",
+        "fade": 60,
+        "focus": 50,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": false,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "eyebrow": "",
+        "heading": "A Better Foundation\nFor Healthier,\nMore Vibrant Hair.",
+        "caption": "Real nutrition. Lasting confidence."
+      }
+    },
+    "closing": {
+      "type": "gl-band",
+      "settings": {
+        "layout": "cta",
+        "image": "shopify://shop_images/gl-mountains.jpg",
+        "image_mobile": "shopify://shop_images/gl-mountains-mobile.jpg",
+        "fade": 55,
+        "focus": 50,
+        "tone": "ink",
+        "heading_tag": "h2",
+        "heading_size": "md",
+        "quote": false,
+        "padding_top": 88,
+        "padding_bottom": 88,
+        "heading": "Nature Gives Us\nThe Ingredients.\nScience Unlocks\nTheir Potential.",
+        "button_label": "Shop Brand Name",
+        "button_url": "shopify://pages/shop",
+        "side_text": "Confidence looks good on you.",
+        "logo": "shopify://shop_images/gl-logo.png"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "blend",
+    "formula",
+    "foundation",
+    "closing"
+  ]
+}

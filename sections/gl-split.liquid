@@ -1,0 +1,674 @@
+{%- liquid
+  assign s = section.settings
+  assign checks = section.blocks | where: 'type', 'check'
+  assign chips = section.blocks | where: 'type', 'chip'
+  assign items = section.blocks | where: 'type', 'item'
+  assign cards = section.blocks | where: 'type', 'card'
+  assign has_aside = false
+  if items.size > 0 or cards.size > 0
+    assign has_aside = true
+  endif
+-%}
+<div
+  id="GlSplit-{{ section.id }}"
+  class="gl gl-split gl--{{ s.tone }} gl-split--media-{{ s.media_side }} gl-split--{{ s.media_style }}{% if cards.size > 0 %} gl-split--panel{% endif %}{% if items.size > 0 %} gl-split--items-{{ s.aside_style }}{% endif %}{% if s.image == blank %} gl-split--no-image{% endif %}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px; --gl-focus: {{ s.focus }}%;"
+>
+  <div class="gl-container gl-split__inner">
+    {%- if s.image != blank or request.design_mode -%}
+      <div class="gl-split__media gl-reveal">
+        {%- render 'gl-image', image: s.image, image_mobile: s.image_mobile, alt: s.image_alt, sizes: '(min-width: 990px) 40vw, 100vw', class: 'gl-split__image', label: 'Image, 1600 x 1600 px' -%}
+      </div>
+    {%- endif -%}
+    <div class="gl-split__content gl-reveal">
+      {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size -%}
+      {%- if chips.size > 0 -%}
+        <ul class="gl-chips gl-chips--inline" role="list" style="--gl-cols: {{ chips.size }};">
+          {%- for block in chips -%}
+            <li class="gl-chips__item" {{ block.shopify_attributes }}>
+              <span class="gl-chip">{%- render 'gl-icon', name: block.settings.icon -%}</span>
+              <span class="gl-chips__label">{{ block.settings.text | escape | newline_to_br }}</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if checks.size > 0 -%}
+        <div class="gl-checkbox">
+          {%- if s.list_heading != blank -%}
+            <p class="gl-checkbox__title">{{ s.list_heading | escape }}</p>
+          {%- endif -%}
+          <ul class="gl-ticks" role="list">
+            {%- for block in checks -%}
+              <li {{ block.shopify_attributes }}>{%- render 'gl-icon', name: 'check' -%}<span>{{ block.settings.text | escape }}</span></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+      {%- if s.button_label != blank or s.link_label != blank -%}
+        <div class="gl-actions">
+          {%- render 'gl-button', label: s.button_label, url: s.button_url, style: s.button_style -%}
+          {%- if s.link_label != blank and s.link_url != blank -%}
+            <a class="gl-link" href="{{ s.link_url }}">{{ s.link_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if s.script_text != blank -%}
+        <p class="gl-script">{{ s.script_text | escape | newline_to_br }}</p>
+      {%- endif -%}
+    </div>
+    {%- if has_aside -%}
+      <div class="gl-split__aside gl-reveal">
+        {%- if items.size > 0 -%}
+          <ul class="gl-items gl-items--{{ s.aside_style }}" role="list">
+            {%- for block in items -%}
+              <li class="gl-items__item" {{ block.shopify_attributes }}>
+                <div class="gl-items__media">
+                  {%- render 'gl-image', image: block.settings.image, alt: block.settings.image_alt, sizes: '160px', class: 'gl-items__img', label: 'Ingredient, 800 x 800 px' -%}
+                </div>
+                <div class="gl-items__body">
+                  <h3 class="gl-items__title">{{ block.settings.title | escape }}</h3>
+                  {%- if block.settings.text != blank -%}
+                    <p class="gl-items__text">{{ block.settings.text | escape }}</p>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if cards.size > 0 -%}
+          <ul class="gl-panel" role="list">
+            {%- for block in cards -%}
+              <li class="gl-panel__item" {% if block.settings.anchor != blank %}id="{{ block.settings.anchor | handle }}"{% endif %} {{ block.shopify_attributes }}>
+                {%- render 'gl-icon', name: block.settings.icon -%}
+                <div>
+                  <h3 class="gl-panel__title">{{ block.settings.title | escape }}</h3>
+                  <div class="gl-panel__text rte">{{ block.settings.text }}</div>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GL | Image with Text",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "select",
+      "id": "media_side",
+      "label": "Photo side",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "media_style",
+      "label": "Photo shape",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "tall",
+          "label": "Tall (4:5)"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "1600 x 1600 px."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image on phones"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description (alt text)"
+    },
+    {
+      "type": "range",
+      "id": "focus",
+      "label": "Photo focus",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50,
+      "info": "Which part of the photo stays in view when it is cropped. 0 is the left edge, 100 the right."
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "lg"
+    },
+    {
+      "type": "text",
+      "id": "list_heading",
+      "label": "Checklist heading"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "dark",
+          "label": "Black"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "gold"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Text link label"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Text link"
+    },
+    {
+      "type": "textarea",
+      "id": "script_text",
+      "label": "Italic line under the text"
+    },
+    {
+      "type": "select",
+      "id": "aside_style",
+      "label": "Ingredient list style",
+      "options": [
+        {
+          "value": "circles",
+          "label": "Round pictures in a grid"
+        },
+        {
+          "value": "rows",
+          "label": "Rows"
+        }
+      ],
+      "default": "circles"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "check",
+      "name": "Checklist item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Healthy-looking hair†"
+        }
+      ]
+    },
+    {
+      "type": "chip",
+      "name": "Icon chip",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "hair",
+              "label": "Hair"
+            },
+            {
+              "value": "strands",
+              "label": "Strands"
+            },
+            {
+              "value": "people",
+              "label": "People"
+            },
+            {
+              "value": "molecule",
+              "label": "Molecule"
+            },
+            {
+              "value": "dna",
+              "label": "Dna"
+            },
+            {
+              "value": "flag",
+              "label": "Flag"
+            },
+            {
+              "value": "gmp",
+              "label": "Gmp"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "capsule",
+              "label": "Capsule"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "mountain",
+              "label": "Mountain"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "headset",
+              "label": "Headset"
+            },
+            {
+              "value": "document",
+              "label": "Document"
+            },
+            {
+              "value": "mail",
+              "label": "Mail"
+            },
+            {
+              "value": "check-circle",
+              "label": "Check circle"
+            }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Plant-based botanicals"
+        }
+      ]
+    },
+    {
+      "type": "item",
+      "name": "Ingredient (aside)",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "800 x 800 px."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image description (alt text)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Ingredient"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Short line"
+        }
+      ]
+    },
+    {
+      "type": "card",
+      "name": "Panel row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "hair",
+              "label": "Hair"
+            },
+            {
+              "value": "strands",
+              "label": "Strands"
+            },
+            {
+              "value": "people",
+              "label": "People"
+            },
+            {
+              "value": "molecule",
+              "label": "Molecule"
+            },
+            {
+              "value": "dna",
+              "label": "Dna"
+            },
+            {
+              "value": "flag",
+              "label": "Flag"
+            },
+            {
+              "value": "gmp",
+              "label": "Gmp"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "capsule",
+              "label": "Capsule"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "mountain",
+              "label": "Mountain"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "headset",
+              "label": "Headset"
+            },
+            {
+              "value": "document",
+              "label": "Document"
+            },
+            {
+              "value": "mail",
+              "label": "Mail"
+            },
+            {
+              "value": "check-circle",
+              "label": "Check circle"
+            }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Our mission"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor name",
+          "info": "Lets a button jump here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Image with Text",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

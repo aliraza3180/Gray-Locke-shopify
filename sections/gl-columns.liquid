@@ -1,0 +1,426 @@
+{%- liquid
+  assign s = section.settings
+  assign has_head = false
+  if s.heading != blank or s.eyebrow != blank or s.heading_accent != blank
+    assign has_head = true
+  endif
+  assign title_tag = 'h3'
+  unless has_head
+    assign title_tag = 'h2'
+  endunless
+-%}
+<div
+  id="GlColumns-{{ section.id }}"
+  class="gl gl-cols gl--{{ s.tone }} gl-cols--{{ s.style }}"
+  style="--gl-pt: {{ s.padding_top }}px; --gl-pb: {{ s.padding_bottom }}px; --gl-cols: {{ section.blocks.size | at_least: 1 }};"
+>
+  <div class="gl-container">
+    {%- if has_head -%}
+      {%- render 'gl-heading', eyebrow: s.eyebrow, heading: s.heading, accent: s.heading_accent, heading_end: s.heading_end, subline: s.subline, text: s.text, tag: s.heading_tag, size: s.heading_size, class: 'gl-head--center' -%}
+    {%- endif -%}
+    <ol class="gl-cols__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        <li class="gl-cols__item gl-reveal" {{ block.shopify_attributes }}>
+          {%- if s.style == 'cards' -%}
+            {%- render 'gl-image', image: b.image, alt: b.image_alt, sizes: '(min-width: 990px) 30vw, 100vw', class: 'gl-cols__image', label: 'Image, 1200 x 800 px' -%}
+          {%- elsif s.style == 'steps' -%}
+            <span class="gl-cols__num" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          {%- else -%}
+            <span class="gl-chip gl-chip--ring">{%- render 'gl-icon', name: b.icon -%}</span>
+          {%- endif -%}
+          <div class="gl-cols__body">
+            <{{ title_tag }} class="gl-cols__title">{{ b.title | escape }}</{{ title_tag }}>
+            {%- if b.text != blank -%}
+              <div class="gl-cols__text rte">{{ b.text }}</div>
+            {%- endif -%}
+            {%- if b.button_label != blank -%}
+              <div class="gl-actions">{%- render 'gl-button', label: b.button_label, url: b.button_url -%}</div>
+            {%- elsif b.link_label != blank and b.link_url != blank -%}
+              <a class="gl-link gl-link--arrow" href="{{ b.link_url }}">{{ b.link_label | escape }}{%- render 'gl-icon', name: 'arrow' -%}</a>
+            {%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if s.button_label != blank -%}
+      <div class="gl-actions gl-actions--center">
+        {%- render 'gl-button', label: s.button_label, url: s.button_url, style: s.button_style -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "GL | Columns",
+  "class": "gl-section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        {
+          "value": "cards",
+          "label": "Photo cards"
+        },
+        {
+          "value": "pillars",
+          "label": "Icon pillars"
+        },
+        {
+          "value": "steps",
+          "label": "Numbered steps"
+        },
+        {
+          "value": "support",
+          "label": "Support cards (icon beside text)"
+        }
+      ],
+      "default": "pillars"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        {
+          "value": "ink",
+          "label": "Black"
+        },
+        {
+          "value": "panel",
+          "label": "Charcoal"
+        },
+        {
+          "value": "ivory",
+          "label": "Ivory"
+        },
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "cream",
+          "label": "Cream"
+        },
+        {
+          "value": "sand",
+          "label": "Sand"
+        },
+        {
+          "value": "champagne",
+          "label": "Champagne"
+        }
+      ],
+      "default": "ivory"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above the heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Press Enter to start a new line."
+    },
+    {
+      "type": "textarea",
+      "id": "heading_accent",
+      "label": "Heading, gold line",
+      "info": "Shown in gold on its own line."
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Small line under the heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading level",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1 (page title)"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        }
+      ],
+      "default": "h2",
+      "info": "Use H1 once per page, in the first section."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        {
+          "value": "xl",
+          "label": "Extra large"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "md",
+          "label": "Medium"
+        },
+        {
+          "value": "sm",
+          "label": "Small"
+        }
+      ],
+      "default": "md"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "dark",
+          "label": "Black"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "hair",
+              "label": "Hair"
+            },
+            {
+              "value": "strands",
+              "label": "Strands"
+            },
+            {
+              "value": "people",
+              "label": "People"
+            },
+            {
+              "value": "molecule",
+              "label": "Molecule"
+            },
+            {
+              "value": "dna",
+              "label": "Dna"
+            },
+            {
+              "value": "flag",
+              "label": "Flag"
+            },
+            {
+              "value": "gmp",
+              "label": "Gmp"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "capsule",
+              "label": "Capsule"
+            },
+            {
+              "value": "calendar",
+              "label": "Calendar"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "sparkle",
+              "label": "Sparkle"
+            },
+            {
+              "value": "sun",
+              "label": "Sun"
+            },
+            {
+              "value": "mountain",
+              "label": "Mountain"
+            },
+            {
+              "value": "drop",
+              "label": "Drop"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "headset",
+              "label": "Headset"
+            },
+            {
+              "value": "document",
+              "label": "Document"
+            },
+            {
+              "value": "mail",
+              "label": "Mail"
+            },
+            {
+              "value": "check-circle",
+              "label": "Check circle"
+            }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1200 x 800 px. Used by \"Photo cards\"."
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image description (alt text)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Button link"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Text link label"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Text link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GL | Columns",
+      "category": "Brand Name"
+    }
+  ]
+}
+{% endschema %}

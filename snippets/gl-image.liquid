@@ -1,0 +1,53 @@
+{%- doc -%}
+  Responsive image for the "GL |" sections, served from Shopify Files.
+  Renders a tinted placeholder when no image has been chosen.
+
+  @param {object} [image] - Image (image_picker setting or product/variant image)
+  @param {object} [image_mobile] - Optional image used on screens up to 989px
+  @param {string} [alt] - Alt text. Falls back to the alt text saved on the file
+  @param {string} [sizes] - sizes attribute
+  @param {boolean} [eager] - Load immediately and with high priority (first section only)
+  @param {string} [class] - Extra class on the wrapper
+  @param {string} [label] - Text shown in the placeholder inside the theme editor
+
+  @example
+  {% render 'gl-image', image: section.settings.image, alt: section.settings.image_alt, class: 'gl-split__image' %}
+{%- enddoc -%}
+{%- liquid
+  assign img_sizes = sizes | default: '(min-width: 990px) 50vw, 100vw'
+  assign img_alt = alt | default: image.alt
+-%}
+<div class="gl-media {{ class }}">
+  {%- if image != blank -%}
+    <picture class="gl-media__picture">
+      {%- if image_mobile != blank -%}
+        <source
+          media="(max-width: 989px)"
+          srcset="{{ image_mobile | image_url: width: 480 }} 480w, {{ image_mobile | image_url: width: 750 }} 750w, {{ image_mobile | image_url: width: 1100 }} 1100w"
+          sizes="100vw"
+          width="{{ image_mobile.width }}"
+          height="{{ image_mobile.height }}"
+        >
+      {%- endif -%}
+      {%- if eager -%}
+        {{
+          image
+          | image_url: width: 2400
+          | image_tag: widths: '360, 540, 750, 990, 1280, 1600, 2000, 2400', sizes: img_sizes, alt: img_alt, class: 'gl-media__img', loading: 'eager', fetchpriority: 'high'
+        }}
+      {%- else -%}
+        {{
+          image
+          | image_url: width: 2400
+          | image_tag: widths: '360, 540, 750, 990, 1280, 1600, 2000, 2400', sizes: img_sizes, alt: img_alt, class: 'gl-media__img', loading: 'lazy'
+        }}
+      {%- endif -%}
+    </picture>
+  {%- else -%}
+    <div class="gl-media__placeholder" aria-hidden="true">
+      {%- if request.design_mode -%}
+        <span>{{ label | default: 'Choose an image' }}</span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
